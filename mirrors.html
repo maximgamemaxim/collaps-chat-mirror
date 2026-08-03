@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Collaps Chat — Зеркала / Mirrors</title>
+    <meta name="description" content="Collaps Chat — список зеркал / mirror list">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Rounded" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+        :root{--bg:#17212b;--bg2:#1e2b37;--bg3:#242f3d;--hover:#2b3b4a;--text:#fff;--gray:#8e9cae;--accent:#2b5278;--accentH:#3a6d99;--border:#0f1b26;--green:#2ecc71}
+        body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+        .mirrors-container{max-width:640px;margin:0 auto;padding:40px 24px;flex:1;width:100%}
+        .mirrors-header{text-align:center;margin-bottom:40px}
+        .mirrors-header .material-symbols-rounded{font-size:48px;color:var(--accent);margin-bottom:16px;display:block}
+        .mirrors-title{font-size:28px;font-weight:700;margin-bottom:8px}
+        .mirrors-subtitle{color:var(--gray);font-size:14px;line-height:1.5}
+        .mirrors-list{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+        .mirror-item{background:var(--bg2);border-radius:12px;padding:18px 20px;border:1px solid var(--border);transition:all .2s;text-decoration:none;color:var(--text);display:flex;align-items:center;gap:16px}
+        .mirror-item:hover{background:var(--hover);border-color:var(--accent);transform:translateX(4px)}
+        .mirror-icon{width:44px;height:44px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .mirror-icon .material-symbols-rounded{font-size:22px;color:#fff}
+        .mirror-info{flex:1;min-width:0}
+        .mirror-name{font-weight:600;font-size:15px;margin-bottom:2px}
+        .mirror-url{font-size:12px;color:var(--gray);word-break:break-all}
+        .mirror-status{display:flex;align-items:center;gap:6px;font-size:11px;flex-shrink:0}
+        .status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0}
+        .mirror-back{display:inline-flex;align-items:center;gap:8px;color:var(--accent);text-decoration:none;font-weight:500;font-size:15px;margin-bottom:24px;padding:8px 16px;border-radius:8px;transition:background .2s}
+        .mirror-back:hover{background:var(--hover)}
+        .mirror-back .material-symbols-rounded{font-size:20px}
+        .mirrors-section-title{font-size:13px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;font-weight:600}
+        .mirrors-footer{text-align:center;padding:24px;font-size:12px;color:var(--gray);border-top:1px solid var(--border);margin-top:auto}
+        .mirrors-footer a{color:var(--accent);text-decoration:none;font-weight:500}
+        @media(max-width:480px){.mirrors-container{padding:24px 16px}.mirror-item{padding:14px 16px}.mirror-status{display:none}}
+    </style>
+</head>
+<body>
+    <div class="mirrors-container">
+        <a href="index.html" class="mirror-back">
+            <span class="material-symbols-rounded">arrow_back</span>
+            Назад / Back
+        </a>
+        
+        <div class="mirrors-header">
+            <span class="material-symbols-rounded">language</span>
+            <h1 class="mirrors-title">Зеркала / Mirrors</h1>
+            <p class="mirrors-subtitle">Если основной сайт недоступен, воспользуйтесь одним из зеркал.<br>If the main site is unavailable, use one of the mirrors below.</p>
+        </div>
+
+        <div class="mirrors-section-title">🌐 Доступные зеркала / Available Mirrors</div>
+        <div class="mirrors-list" id="mirrors-list"></div>
+    </div>
+
+    <div class="mirrors-footer">
+        © 2026 Collaps Chat | <a href="privacy.html" target="_blank">Privacy Policy</a>
+    </div>
+
+    <script>
+        const mirrors = [
+            { name: "Зеркало 1", url: "https://collapschat.l.cd/" },
+            { name: "Зеркало 2", url: "https://collapschat.env.pm/" },
+            { name: "Зеркало 3", url: "http://collapschat.bbroot.com/" },
+            { name: "Зеркало 4", url: "https://collapschat.devs.surf/" },
+            { name: "Зеркало 5", url: "https://collapschat.vexr.dev/" },
+            { name: "Зеркало 6", url: "https://www.collapschat.nx.kg/" },
+            { name: "Зеркало 7", url: "https://collapschat.id.thatako.net/" },
+            { name: "Зеркало 8", url: "https://collapschat.jsx.pm/" }
+        ];
+
+        function renderMirrors() {
+            const container = document.getElementById('mirrors-list');
+            container.innerHTML = mirrors.map((mirror, index) => `
+                <a href="${mirror.url}" class="mirror-item" target="_blank" rel="noopener noreferrer">
+                    <div class="mirror-icon">
+                        <span class="material-symbols-rounded">open_in_new</span>
+                    </div>
+                    <div class="mirror-info">
+                        <div class="mirror-name">${mirror.name}</div>
+                        <div class="mirror-url">${mirror.url}</div>
+                    </div>
+                    <div class="mirror-status">
+                        <span class="status-dot"></span>
+                        <span style="color:var(--green)">Работает</span>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        renderMirrors();
+    </script>
+</body>
+</html>
