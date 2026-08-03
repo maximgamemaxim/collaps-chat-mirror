@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -29,6 +29,7 @@
         .checkbox-row label a{color:var(--accent);text-decoration:none;font-weight:500}
         .auth-footer{position:absolute;bottom:0;left:0;right:0;padding:12px 20px;text-align:center;font-size:11px;color:var(--gray);background:var(--bg);z-index:1}
         .auth-footer a{color:var(--accent);text-decoration:none;font-weight:500}
+        .auth-footer .mirrors-link{color:var(--gray);text-decoration:underline}
         .main-screen{height:100vh;display:none;overflow:hidden;flex-direction:column}.main-screen.active{display:flex}
         .main-content{display:flex;flex:1;overflow:hidden}
         .chats-sidebar{width:360px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;height:100%}
@@ -47,7 +48,7 @@
         .badge-zoro{background:var(--zoro);color:#000}.badge-zoro::after{content:'ZORO'}
         .badge-rustore{background:var(--rustore)}.badge-rustore::after{content:'RUSTORE'}
         .badge-banned{background:var(--red)}.badge-banned::after{content:'BANNED'}
-        .badge-bot-label{background:#8e44ad;padding:2px 7px;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:.3px}.badge-bot-label::after{content:'BOT'}
+        .badge-bot-label{background:#8e44ad;padding:2px 7px;border-radius:6px;font-size:9px;font-weight:700}.badge-bot-label::after{content:'BOT'}
         .announcements-container{padding:0 16px 8px;border-bottom:1px solid var(--border);flex-shrink:0;max-height:200px;overflow-y:auto}
         .announcement-item{background:var(--bg3);border-radius:12px;padding:12px;margin-top:8px;border-left:4px solid var(--accent);cursor:pointer}
         .stories-container{padding:12px 16px;border-bottom:1px solid var(--border);overflow-x:auto;display:flex;gap:14px;flex-shrink:0}
@@ -130,6 +131,9 @@
         .hidden{display:none!important}@keyframes fadeIn{from{opacity:0}to{opacity:1}}
         .main-footer{background:var(--bg2);border-top:1px solid var(--border);padding:8px 16px;text-align:center;font-size:11px;color:var(--gray);flex-shrink:0}
         .main-footer a{color:var(--accent);text-decoration:none;font-weight:500}
+        .lang-switch{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg3);border-radius:8px;margin-top:8px;cursor:pointer}
+        .lang-switch span{font-size:14px;font-weight:500}
+        .lang-switch .lang-flag{font-size:18px}
         @media(max-width:768px){.chats-sidebar{width:100%;position:absolute;z-index:10;display:none}.chats-sidebar.active{display:flex}.chat-area{width:100%;display:none}.chat-area.active{display:flex}#back-to-chats{display:flex!important}}
     </style>
 </head>
@@ -146,26 +150,26 @@
             <div class="auth-container">
                 <span class="material-symbols-rounded" style="font-size:72px;color:var(--accent);margin-bottom:24px;display:block">chat</span>
                 <h1 style="font-size:32px;font-weight:700;margin-bottom:8px">Collaps Chat</h1>
-                <p style="color:var(--gray);margin-bottom:40px;font-size:14px">Secure messenger</p>
+                <p style="color:var(--gray);margin-bottom:40px;font-size:14px" id="auth-subtitle">Secure messenger</p>
                 <div id="login-form">
-                    <button id="google-login-btn" class="btn-google"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>Sign in with Google</button>
-                    <div class="divider"><span class="divider-line"></span><span>or</span><span class="divider-line"></span></div>
+                    <button id="google-login-btn" class="btn-google"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span id="google-btn-text">Sign in with Google</span></button>
+                    <div class="divider"><span class="divider-line"></span><span id="divider-text">or</span><span class="divider-line"></span></div>
                     <input type="text" id="login-username" placeholder="Email" class="auth-input">
                     <input type="password" id="login-password" placeholder="Password" class="auth-input">
-                    <button id="login-btn" class="auth-btn">Sign In</button>
-                    <div class="auth-links"><a href="#" id="show-register">Create account</a></div>
+                    <button id="login-btn" class="auth-btn"><span id="login-btn-text">Sign In</span></button>
+                    <div class="auth-links"><a href="#" id="show-register"><span id="register-link-text">Create account</span></a></div>
                 </div>
                 <div id="register-form" style="display:none">
                     <input type="text" id="register-username" placeholder="Display Name" class="auth-input">
                     <input type="email" id="register-email" placeholder="Email" class="auth-input">
                     <input type="password" id="register-password" placeholder="Password (min 6)" class="auth-input">
-                    <div class="checkbox-row"><input type="checkbox" id="age-checkbox"><label>I confirm that I am <strong>13 years or older</strong></label></div>
-                    <div class="checkbox-row"><input type="checkbox" id="privacy-checkbox"><label>I accept <a href="privacy.html" target="_blank">Privacy Policy</a></label></div>
-                    <button id="register-btn" class="auth-btn" disabled>Create Account</button>
-                    <div class="auth-links"><a href="#" id="show-login">Sign In</a></div>
+                    <div class="checkbox-row"><input type="checkbox" id="age-checkbox"><label id="age-label">I confirm that I am <strong>13 years or older</strong></label></div>
+                    <div class="checkbox-row"><input type="checkbox" id="privacy-checkbox"><label id="privacy-label">I accept <a href="privacy.html" target="_blank">Privacy Policy</a></label></div>
+                    <button id="register-btn" class="auth-btn" disabled><span id="register-btn-text">Create Account</span></button>
+                    <div class="auth-links"><a href="#" id="show-login"><span id="login-link-text">Sign In</span></a></div>
                 </div>
             </div>
-            <div class="auth-footer">© 2026 Collaps Chat | <a href="privacy.html" target="_blank">Privacy Policy</a></div>
+            <div class="auth-footer">© 2026 Collaps Chat | <a href="privacy.html" target="_blank" id="privacy-link-text">Privacy Policy</a> | <a href="mirrors.html" class="mirrors-link" id="mirrors-link-text">Not working?</a></div>
         </div>
 
         <div id="main-screen" class="main-screen">
@@ -176,7 +180,7 @@
                     <div class="announcements-container" id="announcements-container" style="display:none"></div>
                     <div class="stories-container" id="stories-container"></div>
                     <div class="search-container"><input type="text" id="search-input" placeholder="Search..." class="search-input"></div>
-                    <div class="tabs-container"><button class="tab-btn active" data-tab="chats"><span class="material-symbols-rounded">chat_bubble</span> Chats</button><button class="tab-btn" data-tab="channels"><span class="material-symbols-rounded">campaign</span> Channels</button><button class="tab-btn" data-tab="groups"><span class="material-symbols-rounded">groups</span> Groups</button></div>
+                    <div class="tabs-container"><button class="tab-btn active" data-tab="chats"><span class="material-symbols-rounded">chat_bubble</span> <span id="tab-chats">Chats</span></button><button class="tab-btn" data-tab="channels"><span class="material-symbols-rounded">campaign</span> <span id="tab-channels">Channels</span></button><button class="tab-btn" data-tab="groups"><span class="material-symbols-rounded">groups</span> <span id="tab-groups">Groups</span></button></div>
                     <div id="search-results-container" class="search-results-container"><div class="search-results-list" id="search-results-list" style="padding:8px"></div></div>
                     <div id="chats-list-container" class="chats-list-container"><div id="chats-list"></div></div>
                 </div>
@@ -185,28 +189,29 @@
                     <div class="chat-header"><button class="icon-btn" id="back-to-chats"><span class="material-symbols-rounded">arrow_back</span></button><div class="chat-header-info" id="chat-header-info"><div class="chat-avatar" id="chat-avatar"><span class="material-symbols-rounded">person</span></div><div style="min-width:0;flex:1"><div class="chat-title" id="chat-title">Select chat</div><div class="chat-subtitle" id="chat-subtitle"></div></div></div><button class="icon-btn" id="chat-info-btn"><span class="material-symbols-rounded">info</span></button></div>
                     <div class="messages-container" id="messages-container"></div>
                     <div class="message-input-area" id="message-input-area" style="display:none"><label for="file-upload" class="icon-btn" style="cursor:pointer"><span class="material-symbols-rounded">attach_file</span></label><input type="file" id="file-upload" accept="image/*,video/*" style="display:none"><div class="input-wrapper"><input type="text" id="message-input" placeholder="Message" autocomplete="off"></div><button class="send-btn" id="send-btn"><span class="material-symbols-rounded">send</span></button></div>
-                    <div class="channel-locked" id="channel-locked" style="display:none">Only admins can post in this channel</div>
+                    <div class="channel-locked" id="channel-locked" style="display:none"><span id="channel-locked-text">Only admins can post in this channel</span></div>
                 </div>
             </div>
-            <div class="main-footer">© 2026 Collaps Chat | <a href="privacy.html" target="_blank">Privacy Policy</a></div>
+            <div class="main-footer">© 2026 Collaps Chat | <a href="privacy.html" target="_blank" id="main-privacy-link">Privacy Policy</a></div>
         </div>
 
         <div id="profile-screen" class="profile-screen hidden">
-            <div class="profile-header"><button class="icon-btn" id="back-from-profile"><span class="material-symbols-rounded">arrow_back</span></button><h3>Profile</h3><button class="icon-btn" id="edit-profile-btn"><span class="material-symbols-rounded">edit</span></button></div>
-            <div class="profile-content"><div class="profile-avatar-large" id="profile-avatar"></div><div style="text-align:center;font-size:22px;font-weight:700;margin-bottom:8px" id="profile-name"></div><div style="color:var(--gray);font-size:14px;text-align:center;margin-bottom:20px" id="profile-substatus"></div><div class="tg-action-row" id="tg-action-row"><button class="tg-action-btn" id="tg-act-message"><span class="material-symbols-rounded">chat_bubble</span> Chat</button><button class="tg-action-btn" id="tg-act-mute"><span class="material-symbols-rounded">notifications</span> Sound</button><button class="tg-action-btn" id="tg-act-more"><span class="material-symbols-rounded">more_horiz</span> More</button></div><div class="tg-info-list" id="tg-info-list"></div><button class="profile-action-btn danger" id="delete-account-btn"><span class="material-symbols-rounded" style="font-size:18px;vertical-align:middle;margin-right:8px">delete_forever</span> Delete Account</button></div>
+            <div class="profile-header"><button class="icon-btn" id="back-from-profile"><span class="material-symbols-rounded">arrow_back</span></button><h3 id="profile-title">Profile</h3><button class="icon-btn" id="edit-profile-btn"><span class="material-symbols-rounded">edit</span></button></div>
+            <div class="profile-content"><div class="profile-avatar-large" id="profile-avatar"></div><div style="text-align:center;font-size:22px;font-weight:700;margin-bottom:8px" id="profile-name"></div><div style="color:var(--gray);font-size:14px;text-align:center;margin-bottom:20px" id="profile-substatus"></div><div class="tg-action-row" id="tg-action-row"><button class="tg-action-btn" id="tg-act-message"><span class="material-symbols-rounded">chat_bubble</span> <span id="act-chat">Chat</span></button><button class="tg-action-btn" id="tg-act-mute"><span class="material-symbols-rounded">notifications</span> <span id="act-sound">Sound</span></button><button class="tg-action-btn" id="tg-act-more"><span class="material-symbols-rounded">more_horiz</span> <span id="act-more">More</span></button></div><div class="tg-info-list" id="tg-info-list"></div><button class="profile-action-btn danger" id="delete-account-btn"><span class="material-symbols-rounded" style="font-size:18px;vertical-align:middle;margin-right:8px">delete_forever</span> <span id="delete-account-text">Delete Account</span></button></div>
         </div>
 
         <div id="settings-screen" class="settings-screen hidden">
-            <div class="settings-header"><button class="icon-btn" id="back-from-settings"><span class="material-symbols-rounded">arrow_back</span></button><h3>Settings</h3></div>
+            <div class="settings-header"><button class="icon-btn" id="back-from-settings"><span class="material-symbols-rounded">arrow_back</span></button><h3 id="settings-title">Settings</h3></div>
             <div class="settings-content">
-                <div class="settings-item" id="settings-edit-profile"><div class="settings-item-left"><span class="material-symbols-rounded">edit</span><div><div class="settings-item-title">Edit Profile</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
-                <div class="settings-item" id="settings-privacy"><div class="settings-item-left"><span class="material-symbols-rounded">lock</span><div><div class="settings-item-title">Privacy Settings</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
-                <div class="settings-item" id="settings-create-channel"><div class="settings-item-left"><span class="material-symbols-rounded">campaign</span><div><div class="settings-item-title">Create Channel</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
-                <div class="settings-item" id="settings-create-group"><div class="settings-item-left"><span class="material-symbols-rounded">groups</span><div><div class="settings-item-title">Create Group</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
-                <div class="settings-item" id="settings-desktop"><div class="settings-item-left"><span class="material-symbols-rounded">desktop_windows</span><div><div class="settings-item-title">Login to PC Client</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
-                <div class="settings-item" id="settings-announcements"><div class="settings-item-left"><span class="material-symbols-rounded">campaign</span><div><div class="settings-item-title">Announcements</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
-                <div class="settings-item" id="settings-support"><div class="settings-item-left"><span class="material-symbols-rounded">support_agent</span><div><div class="settings-item-title">Support</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
-                <div class="settings-item" id="settings-delete" style="border-left:3px solid var(--red)"><div class="settings-item-left"><span class="material-symbols-rounded" style="color:var(--red)">warning</span><div><div class="settings-item-title" style="color:var(--red)">Delete Account</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
+                <div class="settings-item" id="settings-edit-profile"><div class="settings-item-left"><span class="material-symbols-rounded">edit</span><div><div class="settings-item-title" id="set-edit-profile">Edit Profile</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
+                <div class="settings-item" id="settings-privacy"><div class="settings-item-left"><span class="material-symbols-rounded">lock</span><div><div class="settings-item-title" id="set-privacy">Privacy Settings</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
+                <div class="settings-item" id="settings-create-channel"><div class="settings-item-left"><span class="material-symbols-rounded">campaign</span><div><div class="settings-item-title" id="set-create-channel">Create Channel</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
+                <div class="settings-item" id="settings-create-group"><div class="settings-item-left"><span class="material-symbols-rounded">groups</span><div><div class="settings-item-title" id="set-create-group">Create Group</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
+                <div class="settings-item" id="settings-desktop"><div class="settings-item-left"><span class="material-symbols-rounded">desktop_windows</span><div><div class="settings-item-title" id="set-desktop">Login to PC Client</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
+                <div class="settings-item" id="settings-language"><div class="settings-item-left"><span class="material-symbols-rounded">translate</span><div><div class="settings-item-title" id="set-language">Language</div><div style="font-size:12px;color:var(--gray)" id="set-language-value">Русский</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
+                <div class="settings-item" id="settings-announcements"><div class="settings-item-left"><span class="material-symbols-rounded">campaign</span><div><div class="settings-item-title" id="set-announcements">Announcements</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
+                <div class="settings-item" id="settings-support"><div class="settings-item-left"><span class="material-symbols-rounded">support_agent</span><div><div class="settings-item-title" id="set-support">Support</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
+                <div class="settings-item" id="settings-delete" style="border-left:3px solid var(--red)"><div class="settings-item-left"><span class="material-symbols-rounded" style="color:var(--red)">warning</span><div><div class="settings-item-title" style="color:var(--red)" id="set-delete">Delete Account</div></div></div><span class="material-symbols-rounded">chevron_right</span></div>
             </div>
         </div>
     </div>
@@ -215,6 +220,334 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
     <script>
+        // Language system
+        const LANGUAGES = {
+            ru: {
+                authSubtitle: 'Безопасный мессенджер',
+                googleBtnText: 'Войти через Google',
+                dividerText: 'или',
+                loginBtnText: 'Войти',
+                registerLinkText: 'Создать аккаунт',
+                registerBtnText: 'Создать аккаунт',
+                loginLinkText: 'Войти',
+                ageLabel: 'Я подтверждаю, что мне <strong>13 лет или больше</strong>',
+                privacyLabel: 'Я принимаю <a href="privacy.html" target="_blank">Политику конфиденциальности</a>',
+                privacyLinkText: 'Политика конфиденциальности',
+                mirrorsLinkText: 'Не работает?',
+                tabChats: 'Чаты',
+                tabChannels: 'Каналы',
+                tabGroups: 'Группы',
+                channelLockedText: 'Только админы могут писать в этот канал',
+                mainPrivacyLink: 'Политика конфиденциальности',
+                profileTitle: 'Профиль',
+                actChat: 'Чат',
+                actSound: 'Звук',
+                actMore: 'Ещё',
+                deleteAccountText: 'Удалить аккаунт',
+                settingsTitle: 'Настройки',
+                setEditProfile: 'Редактировать профиль',
+                setPrivacy: 'Настройки приватности',
+                setCreateChannel: 'Создать канал',
+                setCreateGroup: 'Создать группу',
+                setDesktop: 'Войти в ПК клиент',
+                setLanguage: 'Язык',
+                setAnnouncements: 'Объявления',
+                setSupport: 'Поддержка',
+                setDelete: 'Удалить аккаунт',
+                searchPlaceholder: 'Поиск...',
+                messagePlaceholder: 'Сообщение',
+                selectChat: 'Выберите чат',
+                loading: 'Загрузка...',
+                noChats: 'Нет чатов',
+                online: 'онлайн',
+                offline: 'оффлайн',
+                thisIsYou: 'это вы',
+                bot: 'бот',
+                subscribers: 'подписчиков',
+                members: 'участников',
+                chatCreated: 'Чат создан',
+                channelCreated: 'Канал создан',
+                groupCreated: 'Группа создана',
+                photo: 'Фото',
+                video: 'Видео',
+                newMessage: 'Новое сообщение',
+                uploading: 'Загрузка...',
+                sent: 'Отправлено!',
+                error: 'Ошибка',
+                fillFields: 'Заполните поля',
+                passwordMin6: 'Пароль минимум 6 символов',
+                emailTaken: 'Email занят',
+                invalidCredentials: 'Неверные данные',
+                accountBanned: 'Аккаунт забанен',
+                renamed: 'Переименовано!',
+                adminAdded: 'Админ добавлен!',
+                memberAdded: 'Участник добавлен!',
+                avatarUpdated: 'Аватар обновлён!',
+                profileUpdated: 'Профиль обновлён!',
+                privacySaved: 'Приватность сохранена!',
+                notificationsON: 'Уведомления ВКЛ',
+                notificationsOFF: 'Уведомления ВЫКЛ',
+                joined: 'Присоединились!',
+                userNotFound: 'Пользователь не найден',
+                cannotPost: 'Нельзя отправить',
+                tooLarge: 'Слишком большой',
+                max100MB: 'Макс 100 МБ',
+                imagesOnly: 'Только изображения/видео',
+                desktopNotFound: 'Десктоп приложение не найдено',
+                installDesktop: 'Установите Collaps Chat Desktop',
+                supportContact: 'Свяжитесь с нами по email:\n\ncollapschat@bk.ru',
+                deleteConfirm: 'Нельзя отменить!',
+                deleteTitle: 'Удалить аккаунт',
+                close: 'Закрыть',
+                save: 'Сохранить',
+                cancel: 'Отмена',
+                create: 'Создать',
+                delete: 'Удалить',
+                join: 'Присоединиться',
+                message: 'Сообщение',
+                send: 'Отправить',
+                loadHistory: 'Загрузить историю',
+                noStories: 'Нет историй',
+                published: 'Опубликовано!',
+                hours24: '24 часа',
+                nothingFound: 'Ничего не найдено',
+                publicChannel: 'Публичный канал',
+                publicGroup: 'Публичная группа',
+                languageChanged: 'Язык изменён',
+                restartApp: 'Перезапустите приложение для полного применения',
+                languageTitle: 'Выберите язык',
+                russian: '🇷🇺 Русский',
+                english: '🇬🇧 English'
+            },
+            en: {
+                authSubtitle: 'Secure messenger',
+                googleBtnText: 'Sign in with Google',
+                dividerText: 'or',
+                loginBtnText: 'Sign In',
+                registerLinkText: 'Create account',
+                registerBtnText: 'Create Account',
+                loginLinkText: 'Sign In',
+                ageLabel: 'I confirm that I am <strong>13 years or older</strong>',
+                privacyLabel: 'I accept <a href="privacy.html" target="_blank">Privacy Policy</a>',
+                privacyLinkText: 'Privacy Policy',
+                mirrorsLinkText: 'Not working?',
+                tabChats: 'Chats',
+                tabChannels: 'Channels',
+                tabGroups: 'Groups',
+                channelLockedText: 'Only admins can post in this channel',
+                mainPrivacyLink: 'Privacy Policy',
+                profileTitle: 'Profile',
+                actChat: 'Chat',
+                actSound: 'Sound',
+                actMore: 'More',
+                deleteAccountText: 'Delete Account',
+                settingsTitle: 'Settings',
+                setEditProfile: 'Edit Profile',
+                setPrivacy: 'Privacy Settings',
+                setCreateChannel: 'Create Channel',
+                setCreateGroup: 'Create Group',
+                setDesktop: 'Login to PC Client',
+                setLanguage: 'Language',
+                setAnnouncements: 'Announcements',
+                setSupport: 'Support',
+                setDelete: 'Delete Account',
+                searchPlaceholder: 'Search...',
+                messagePlaceholder: 'Message',
+                selectChat: 'Select chat',
+                loading: 'Loading...',
+                noChats: 'No chats',
+                online: 'online',
+                offline: 'offline',
+                thisIsYou: 'this is you',
+                bot: 'bot',
+                subscribers: 'subscribers',
+                members: 'members',
+                chatCreated: 'Chat created',
+                channelCreated: 'Channel created',
+                groupCreated: 'Group created',
+                photo: 'Photo',
+                video: 'Video',
+                newMessage: 'New message',
+                uploading: 'Uploading...',
+                sent: 'Sent!',
+                error: 'Error',
+                fillFields: 'Fill all fields',
+                passwordMin6: 'Password min 6 characters',
+                emailTaken: 'Email already in use',
+                invalidCredentials: 'Invalid credentials',
+                accountBanned: 'Account banned',
+                renamed: 'Renamed!',
+                adminAdded: 'Admin added!',
+                memberAdded: 'Member added!',
+                avatarUpdated: 'Avatar updated!',
+                profileUpdated: 'Profile updated!',
+                privacySaved: 'Privacy saved!',
+                notificationsON: 'Notifications ON',
+                notificationsOFF: 'Notifications OFF',
+                joined: 'Joined!',
+                userNotFound: 'User not found',
+                cannotPost: 'Cannot post',
+                tooLarge: 'Too large',
+                max100MB: 'Max 100 MB',
+                imagesOnly: 'Images/videos only',
+                desktopNotFound: 'Desktop app not found',
+                installDesktop: 'Install Collaps Chat Desktop',
+                supportContact: 'Contact us via email:\n\ncollapschat@bk.ru',
+                deleteConfirm: 'Cannot be undone!',
+                deleteTitle: 'Delete Account',
+                close: 'Close',
+                save: 'Save',
+                cancel: 'Cancel',
+                create: 'Create',
+                delete: 'Delete',
+                join: 'Join',
+                message: 'Message',
+                send: 'Send',
+                loadHistory: 'Load history',
+                noStories: 'No stories',
+                published: 'Published!',
+                hours24: '24 hours',
+                nothingFound: 'Nothing found',
+                publicChannel: 'Public Channel',
+                publicGroup: 'Public Group',
+                languageChanged: 'Language changed',
+                restartApp: 'Restart app for full effect',
+                languageTitle: 'Select Language',
+                russian: '🇷🇺 Русский',
+                english: '🇬🇧 English'
+            }
+        };
+
+        let currentLang = localStorage.getItem('collaps_lang') || 'ru';
+        
+        function t(key) {
+            return LANGUAGES[currentLang]?.[key] || LANGUAGES['ru'][key] || key;
+        }
+
+        function applyLanguage() {
+            // Auth screen
+            const authSubtitle = document.getElementById('auth-subtitle');
+            if (authSubtitle) authSubtitle.textContent = t('authSubtitle');
+            
+            const googleBtnText = document.getElementById('google-btn-text');
+            if (googleBtnText) googleBtnText.textContent = t('googleBtnText');
+            
+            const dividerText = document.getElementById('divider-text');
+            if (dividerText) dividerText.textContent = t('dividerText');
+            
+            const loginBtnText = document.getElementById('login-btn-text');
+            if (loginBtnText) loginBtnText.textContent = t('loginBtnText');
+            
+            const registerLinkText = document.getElementById('register-link-text');
+            if (registerLinkText) registerLinkText.textContent = t('registerLinkText');
+            
+            const registerBtnText = document.getElementById('register-btn-text');
+            if (registerBtnText) registerBtnText.textContent = t('registerBtnText');
+            
+            const loginLinkText = document.getElementById('login-link-text');
+            if (loginLinkText) loginLinkText.textContent = t('loginLinkText');
+            
+            const ageLabel = document.getElementById('age-label');
+            if (ageLabel) ageLabel.innerHTML = t('ageLabel');
+            
+            const privacyLabel = document.getElementById('privacy-label');
+            if (privacyLabel) privacyLabel.innerHTML = t('privacyLabel');
+            
+            const privacyLinkText = document.getElementById('privacy-link-text');
+            if (privacyLinkText) privacyLinkText.textContent = t('privacyLinkText');
+            
+            const mirrorsLinkText = document.getElementById('mirrors-link-text');
+            if (mirrorsLinkText) mirrorsLinkText.textContent = t('mirrorsLinkText');
+            
+            // Main screen
+            const tabChats = document.getElementById('tab-chats');
+            if (tabChats) tabChats.textContent = t('tabChats');
+            
+            const tabChannels = document.getElementById('tab-channels');
+            if (tabChannels) tabChannels.textContent = t('tabChannels');
+            
+            const tabGroups = document.getElementById('tab-groups');
+            if (tabGroups) tabGroups.textContent = t('tabGroups');
+            
+            const channelLockedText = document.getElementById('channel-locked-text');
+            if (channelLockedText) channelLockedText.textContent = t('channelLockedText');
+            
+            const mainPrivacyLink = document.getElementById('main-privacy-link');
+            if (mainPrivacyLink) mainPrivacyLink.textContent = t('mainPrivacyLink');
+            
+            // Profile screen
+            const profileTitle = document.getElementById('profile-title');
+            if (profileTitle) profileTitle.textContent = t('profileTitle');
+            
+            const actChat = document.getElementById('act-chat');
+            if (actChat) actChat.textContent = t('actChat');
+            
+            const actSound = document.getElementById('act-sound');
+            if (actSound) actSound.textContent = t('actSound');
+            
+            const actMore = document.getElementById('act-more');
+            if (actMore) actMore.textContent = t('actMore');
+            
+            const deleteAccountText = document.getElementById('delete-account-text');
+            if (deleteAccountText) deleteAccountText.textContent = t('deleteAccountText');
+            
+            // Settings screen
+            const settingsTitle = document.getElementById('settings-title');
+            if (settingsTitle) settingsTitle.textContent = t('settingsTitle');
+            
+            const setEditProfile = document.getElementById('set-edit-profile');
+            if (setEditProfile) setEditProfile.textContent = t('setEditProfile');
+            
+            const setPrivacy = document.getElementById('set-privacy');
+            if (setPrivacy) setPrivacy.textContent = t('setPrivacy');
+            
+            const setCreateChannel = document.getElementById('set-create-channel');
+            if (setCreateChannel) setCreateChannel.textContent = t('setCreateChannel');
+            
+            const setCreateGroup = document.getElementById('set-create-group');
+            if (setCreateGroup) setCreateGroup.textContent = t('setCreateGroup');
+            
+            const setDesktop = document.getElementById('set-desktop');
+            if (setDesktop) setDesktop.textContent = t('setDesktop');
+            
+            const setLanguage = document.getElementById('set-language');
+            if (setLanguage) setLanguage.textContent = t('setLanguage');
+            
+            const setLanguageValue = document.getElementById('set-language-value');
+            if (setLanguageValue) setLanguageValue.textContent = currentLang === 'ru' ? '🇷🇺 Русский' : '🇬🇧 English';
+            
+            const setAnnouncements = document.getElementById('set-announcements');
+            if (setAnnouncements) setAnnouncements.textContent = t('setAnnouncements');
+            
+            const setSupport = document.getElementById('set-support');
+            if (setSupport) setSupport.textContent = t('setSupport');
+            
+            const setDelete = document.getElementById('set-delete');
+            if (setDelete) setDelete.textContent = t('setDelete');
+            
+            // Placeholders
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) searchInput.placeholder = t('searchPlaceholder');
+            
+            const messageInput = document.getElementById('message-input');
+            if (messageInput) messageInput.placeholder = t('messagePlaceholder');
+            
+            // Chat title
+            const chatTitle = document.getElementById('chat-title');
+            if (chatTitle && chatTitle.textContent === 'Select chat') chatTitle.textContent = t('selectChat');
+        }
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('collaps_lang', lang);
+            applyLanguage();
+            nt(t('languageChanged'), t('restartApp'), 'success');
+            setTimeout(() => {
+                rcl();
+                if (cc) oc(cc);
+            }, 500);
+        }
+
         const fc={apiKey:"AIzaSyDdey6ZroD4KsiPiD2dnVfQe3I3OW3MPV8",authDomain:"max-chat-f9319.firebaseapp.com",databaseURL:"https://max-chat-f9319-default-rtdb.europe-west1.firebasedatabase.app",projectId:"max-chat-f9319",storageBucket:"max-chat-f9319.firebasestorage.app",messagingSenderId:"1013158224179",appId:"1:1013158224179:web:c4a052ca2e86034de59e46"};
         firebase.initializeApp(fc);const db=firebase.database(),auth=firebase.auth(),gp=new firebase.auth.GoogleAuthProvider();
         const CL='qik0zmv8',UP='collaps_chat',DA='https://ui-avatars.com/api/?name=User&background=2b5278&color=fff&size=256';
@@ -229,7 +562,7 @@
         function gci(){const s=new Set();Object.values(ac).forEach(c=>{if(c.type==='private'&&c.participants&&c.participants[ci]){Object.keys(c.participants).forEach(id=>{if(id!==ci)s.add(id)})}});return s}
 
         async function ucf(file){const fd=new FormData();fd.append('file',file);fd.append('upload_preset',UP);const r=await fetch(`https://api.cloudinary.com/v1_1/${CL}/auto/upload`,{method:'POST',body:fd});if(!r.ok){const e=await r.json();throw new Error(e.error?.message||'Upload failed')}return await r.json()}
-        async function usf(file){if(!cci){nt('Select chat','','error');return}if(cc?.chatType==='channel'&&!ica()){nt('Cannot post','','error');return}try{nt('Uploading...','','info');const r=await ucf(file);const m={type:r.resource_type==='video'?'video':'image',url:r.secure_url,publicId:r.public_id,senderId:ci,senderName:cu?.username||'User',timestamp:Date.now()};await push(ref(db,`chats/${cci}/messages`),m);await upd(ref(db,`chats/${cci}`),{lastMessage:r.resource_type==='video'?'Video':'Photo',lastMessageTime:Date.now()});nt('Sent!','','success')}catch(e){nt('Error',e.message,'error')}}
+        async function usf(file){if(!cci){nt(t('selectChat'),'','error');return}if(cc?.chatType==='channel'&&!ica()){nt(t('cannotPost'),'','error');return}try{nt(t('uploading'),'','info');const r=await ucf(file);const m={type:r.resource_type==='video'?'video':'image',url:r.secure_url,publicId:r.public_id,senderId:ci,senderName:cu?.username||'User',timestamp:Date.now()};await push(ref(db,`chats/${cci}/messages`),m);await upd(ref(db,`chats/${cci}`),{lastMessage:r.resource_type==='video'?t('video'):t('photo'),lastMessageTime:Date.now()});nt(t('sent'),'','success')}catch(e){nt(t('error'),e.message,'error')}}
 
         function ica(){if(!cc||!ci)return false;if(cc.chatType==='channel'||cc.chatType==='group'){const adm=cc.admins;if(adm&&adm[ci])return true;return cc.createdBy===ci}return true}
 
@@ -237,7 +570,7 @@
         function ran(){const c=document.getElementById('announcements-container');if(!c)return;const now=Date.now();const act=Object.values(aan).filter(a=>a.expiresAt>now).sort((a,b)=>(b.priority||0)-(a.priority||0));if(!act.length){c.style.display='none';return}c.style.display='block';c.innerHTML='';act.forEach(a=>{const d=document.createElement('div');d.className='announcement-item';d.style.borderLeftColor=a.color||'var(--accent)';d.innerHTML=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span>${a.icon||'📢'}</span><span style="font-weight:600;font-size:13px">${eh(a.title||'')}</span></div><div style="font-size:12px;color:var(--gray)">${eh(a.text||'')}</div><div style="font-size:10px;color:var(--gray);margin-top:4px;text-align:right">Until ${new Date(a.expiresAt).toLocaleString()}</div>`;if(a.actionUrl){d.style.cursor='pointer';d.addEventListener('click',()=>window.open(a.actionUrl,'_blank'))}c.appendChild(d)})}
 
         function ls(){if(su)su();su=onV(ref(db,'stories'),snap=>{ast=snap.val()||{};rs()})}
-        function rs(){const c=document.getElementById('stories-container');if(!c)return;const cont=gci();cont.add(ci);let h=`<div class="story-item" id="my-story-item"><div class="story-avatar my-story" style="background-image:url('${cu?.avatar||DA}')"><div class="story-add-icon"><span class="material-symbols-rounded">add</span></div></div><div class="story-name">Load history</div></div>`;const bu={};Object.values(ast).forEach(s=>{if(!s.expiresAt||s.expiresAt<Date.now())return;if(!cont.has(s.userId))return;if(!bu[s.userId])bu[s.userId]=[];bu[s.userId].push(s)});Object.entries(bu).forEach(([uid,ss])=>{const u=au[uid];if(!u)return;const un=ss.some(s=>!s.viewers||!s.viewers[ci]);h+=`<div class="story-item" data-user-id="${uid}"><div class="story-avatar ${un?'':'seen'}" style="background-image:url('${u.avatar||DA}')"></div><div class="story-name">${eh(u.username||'')}</div></div>`});c.innerHTML=h||'<div style="color:var(--gray);font-size:13px;padding:8px">No stories</div>';setTimeout(()=>{document.getElementById('my-story-item')?.addEventListener('click',()=>{const inp=document.createElement('input');inp.type='file';inp.accept='image/*,video/*';inp.onchange=async e=>{const f=e.target.files[0];if(!f)return;try{nt('Uploading...','','info');const r=await ucf(f);const s={id:push(ref(db,'stories')).key,userId:ci,username:cu.username,url:r.secure_url,type:r.resource_type,createdAt:Date.now(),expiresAt:Date.now()+86400000,viewers:{}};await set(ref(db,`stories/${s.id}`),s);nt('Published!','24 hours','success')}catch(err){nt('Error',err.message,'error')}};inp.click()});c.querySelectorAll('.story-item[data-user-id]').forEach(item=>{item.addEventListener('click',()=>{const uid=item.dataset.userId;const ss=Object.values(ast).filter(s=>s.userId===uid&&s.expiresAt>Date.now());if(ss.length)vs(uid,ss)})})},100)}
+        function rs(){const c=document.getElementById('stories-container');if(!c)return;const cont=gci();cont.add(ci);let h=`<div class="story-item" id="my-story-item"><div class="story-avatar my-story" style="background-image:url('${cu?.avatar||DA}')"><div class="story-add-icon"><span class="material-symbols-rounded">add</span></div></div><div class="story-name">${t('loadHistory')}</div></div>`;const bu={};Object.values(ast).forEach(s=>{if(!s.expiresAt||s.expiresAt<Date.now())return;if(!cont.has(s.userId))return;if(!bu[s.userId])bu[s.userId]=[];bu[s.userId].push(s)});Object.entries(bu).forEach(([uid,ss])=>{const u=au[uid];if(!u)return;const un=ss.some(s=>!s.viewers||!s.viewers[ci]);h+=`<div class="story-item" data-user-id="${uid}"><div class="story-avatar ${un?'':'seen'}" style="background-image:url('${u.avatar||DA}')"></div><div class="story-name">${eh(u.username||'')}</div></div>`});c.innerHTML=h||`<div style="color:var(--gray);font-size:13px;padding:8px">${t('noStories')}</div>`;setTimeout(()=>{document.getElementById('my-story-item')?.addEventListener('click',()=>{const inp=document.createElement('input');inp.type='file';inp.accept='image/*,video/*';inp.onchange=async e=>{const f=e.target.files[0];if(!f)return;try{nt(t('uploading'),'','info');const r=await ucf(f);const s={id:push(ref(db,'stories')).key,userId:ci,username:cu.username,url:r.secure_url,type:r.resource_type,createdAt:Date.now(),expiresAt:Date.now()+86400000,viewers:{}};await set(ref(db,`stories/${s.id}`),s);nt(t('published'),t('hours24'),'success')}catch(err){nt(t('error'),err.message,'error')}};inp.click()});c.querySelectorAll('.story-item[data-user-id]').forEach(item=>{item.addEventListener('click',()=>{const uid=item.dataset.userId;const ss=Object.values(ast).filter(s=>s.userId===uid&&s.expiresAt>Date.now());if(ss.length)vs(uid,ss)})})},100)}
         function vs(uid,ss){const v=document.getElementById('story-viewer'),u=au[uid];if(!u||!ss.length)return;let idx=0,iv;v.classList.add('active');document.getElementById('story-viewer-avatar').style.backgroundImage=`url('${u.avatar||DA}')`;document.getElementById('story-viewer-name').textContent=u.username;function show(i){if(i>=ss.length){v.classList.remove('active');clearInterval(iv);ss.forEach(s=>{if(!s.viewers)s.viewers={};s.viewers[ci]=true;upd(ref(db,`stories/${s.id}/viewers/${ci}`),true)});return}const s=ss[i];idx=i;document.getElementById('story-viewer-time').textContent=ft(s.createdAt);document.getElementById('story-progress').innerHTML=ss.map((_,j)=>`<div class="story-progress-bar"><div class="story-progress-fill" id="p-${j}" style="width:${j<i?'100%':'0%'}"></div></div>`).join('');const cnt=document.getElementById('story-viewer-content');if(s.type==='video'){cnt.innerHTML=`<video src="${s.url}" class="story-viewer-media" autoplay id="sv"></video>`;document.getElementById('sv').onended=()=>show(i+1)}else{cnt.innerHTML=`<img src="${s.url}" class="story-viewer-media">`;let p=0;clearInterval(iv);iv=setInterval(()=>{p+=2;const bar=document.getElementById(`p-${i}`);if(bar)bar.style.width=p+'%';if(p>=100){clearInterval(iv);show(i+1)}},100)}}show(0);document.getElementById('story-viewer-close').onclick=()=>{v.classList.remove('active');clearInterval(iv);ss.forEach(s=>{if(!s.viewers)s.viewers={};s.viewers[ci]=true;upd(ref(db,`stories/${s.id}/viewers/${ci}`),true)})}}
 
         function lau(){onV(ref(db,'users'),snap=>{au=snap.val()||{};rcl();rs();eb()})}
@@ -248,41 +581,41 @@
 
         function luc(){if(!ci)return;if(chu)chu();chu=onV(ref(db,'chats'),snap=>{const d=snap.val()||{};ac={};Object.entries(d).forEach(([id,chat])=>{if(chat.participants&&chat.participants[ci])ac[id]=chat});rcl()})}
         function gfc(){const c=Object.values(ac);if(at==='channels')return c.filter(x=>x.chatType==='channel');if(at==='groups')return c.filter(x=>x.chatType==='group');return c.filter(x=>!x.chatType||x.chatType==='private')}
-        function rcl(){const l=document.getElementById('chats-list');if(!l)return;const f=gfc().sort((a,b)=>(b.lastMessageTime||b.createdAt||0)-(a.lastMessageTime||a.createdAt||0));if(!f.length){l.innerHTML='<div style="text-align:center;padding:40px;color:var(--gray)">No chats</div>';return}l.innerHTML='';f.forEach(chat=>{const d=document.createElement('div');d.className='chat-item';let name='Chat',avatar=DA,lastMsg=chat.lastMessage||'',time=(chat.lastMessageTime||chat.createdAt)?ft(chat.lastMessageTime||chat.createdAt):'',online=false,otherUser=null,typeBadge='',unreadHtml='';if(chat.chatType==='channel'){name=chat.name||'Channel';typeBadge='<span class="chat-type-badge chat-type-channel">CH</span>'}else if(chat.chatType==='group'){name=chat.name||'Group';typeBadge='<span class="chat-type-badge chat-type-group">GR</span>'}else if(chat.type==='private'&&chat.participants){const oid=Object.keys(chat.participants).find(id=>id!==ci);otherUser=au[oid];if(otherUser){name=otherUser.username;avatar=otherUser.avatar||DA;online=otherUser.online||false}}const un=uc[chat.id]||0;if(un>0)unreadHtml=`<span style="background:var(--accent);color:#fff;border-radius:12px;padding:2px 8px;font-size:11px;font-weight:700">${un}</span>`;d.innerHTML=`<div style="position:relative;margin-right:12px"><div class="avatar-img" style="background-image:url('${avatar}')"></div>${online?'<div class="online-dot"></div>':''}</div><div style="flex:1"><div style="display:flex;justify-content:space-between"><div style="font-weight:600;font-size:15px;display:flex;align-items:center;gap:4px">${eh(name)} ${typeBadge} ${gb(otherUser)}</div><span style="font-size:12px;color:var(--gray)">${time}</span></div><div style="display:flex;justify-content:space-between;margin-top:4px"><span style="font-size:14px;color:var(--gray)">${eh(lastMsg)}</span>${unreadHtml}</div></div>`;d.addEventListener('click',()=>oc(chat));l.appendChild(d)})}
+        function rcl(){const l=document.getElementById('chats-list');if(!l)return;const f=gfc().sort((a,b)=>(b.lastMessageTime||b.createdAt||0)-(a.lastMessageTime||a.createdAt||0));if(!f.length){l.innerHTML=`<div style="text-align:center;padding:40px;color:var(--gray)">${t('noChats')}</div>`;return}l.innerHTML='';f.forEach(chat=>{const d=document.createElement('div');d.className='chat-item';let name='Chat',avatar=DA,lastMsg=chat.lastMessage||'',time=(chat.lastMessageTime||chat.createdAt)?ft(chat.lastMessageTime||chat.createdAt):'',online=false,otherUser=null,typeBadge='',unreadHtml='';if(chat.chatType==='channel'){name=chat.name||'Channel';typeBadge='<span class="chat-type-badge chat-type-channel">CH</span>'}else if(chat.chatType==='group'){name=chat.name||'Group';typeBadge='<span class="chat-type-badge chat-type-group">GR</span>'}else if(chat.type==='private'&&chat.participants){const oid=Object.keys(chat.participants).find(id=>id!==ci);otherUser=au[oid];if(otherUser){name=otherUser.username;avatar=otherUser.avatar||DA;online=otherUser.online||false}}const un=uc[chat.id]||0;if(un>0)unreadHtml=`<span style="background:var(--accent);color:#fff;border-radius:12px;padding:2px 8px;font-size:11px;font-weight:700">${un}</span>`;d.innerHTML=`<div style="position:relative;margin-right:12px"><div class="avatar-img" style="background-image:url('${avatar}')"></div>${online?'<div class="online-dot"></div>':''}</div><div style="flex:1"><div style="display:flex;justify-content:space-between"><div style="font-weight:600;font-size:15px;display:flex;align-items:center;gap:4px">${eh(name)} ${typeBadge} ${gb(otherUser)}</div><span style="font-size:12px;color:var(--gray)">${time}</span></div><div style="display:flex;justify-content:space-between;margin-top:4px"><span style="font-size:14px;color:var(--gray)">${eh(lastMsg)}</span>${unreadHtml}</div></div>`;d.addEventListener('click',()=>oc(chat));l.appendChild(d)})}
 
-        function sa(q){if(!q){document.getElementById('search-results-container').classList.remove('active');document.getElementById('chats-list-container').classList.remove('hidden');return}const lq=q.toLowerCase().replace(/^@/,''),res=[];Object.entries(au).forEach(([uid,u])=>{if(!u||uid===ci)return;const priv=u.privacySettings||{};const fm=priv.findMe||'everyone';if(fm==='nobody')return;if(fm==='username'&&!lq.startsWith('@'))return;const nm=(u.username||'').toLowerCase(),un=(u.searchUsername||'').toLowerCase();if(nm.includes(lq)||un.includes(lq))res.push({type:'user',user:u,userId:uid,score:un===lq?0:1})});fetch('https://max-chat-f9319-default-rtdb.europe-west1.firebasedatabase.app/chats.json').then(r=>r.json()).then(allChats=>{if(!allChats)return;Object.entries(allChats).forEach(([cid,chat])=>{if(!chat.name||chat.type==='private')return;if(chat.participants&&chat.participants[ci])return;if(chat.privacy&&chat.privacy!=='public')return;const chatName=(chat.name||'').toLowerCase(),chatUsername=(chat.username||'').toLowerCase();if(chatName.includes(lq)||chatUsername.includes(lq))res.push({type:'public_chat',chat:chat,chatId:cid,score:chatUsername===lq?0:1})});res.sort((a,b)=>a.score-b.score);const rl=document.getElementById('search-results-list');if(!res.length){rl.innerHTML='<div style="text-align:center;padding:20px;color:var(--gray)">Nothing found</div>'}else{rl.innerHTML='';res.forEach(r=>{const d=document.createElement('div');d.className='search-result-item';if(r.type==='user'){const av=r.user.avatar||DA;d.innerHTML=`<div class="avatar-img" style="width:48px;height:48px;background-image:url('${av}');margin-right:12px"></div><div style="flex:1"><div style="font-weight:600;font-size:15px">${eh(r.user.username)} ${gb(r.user)}</div><div style="font-size:12px;color:var(--gray)">@${eh(r.user.searchUsername||'')}</div></div><button style="padding:8px 16px;background:var(--accent);border:none;border-radius:20px;color:#fff;font-size:13px;cursor:pointer">Message</button>`;d.querySelector('button').addEventListener('click',e=>{e.stopPropagation();scwu(r.userId)});d.addEventListener('click',()=>oup(r.userId))}else{const isChannel=r.chat.chatType==='channel';const avatarUrl=r.chat.avatar||DA;d.innerHTML=`<div class="avatar-img" style="width:48px;height:48px;background-image:url('${avatarUrl}');margin-right:12px"></div><div style="flex:1"><div style="font-weight:600;font-size:15px">${eh(r.chat.name)}</div><div style="font-size:12px;color:var(--gray)">${r.chat.username?'@'+eh(r.chat.username):isChannel?'Public Channel':'Public Group'}</div></div><button style="padding:8px 16px;background:var(--green);border:none;border-radius:20px;color:#fff;font-size:13px;cursor:pointer">Join</button>`;d.querySelector('button').addEventListener('click',async e=>{e.stopPropagation();await jpc(r.chatId,r.chat.chatType)});d.addEventListener('click',()=>scp(r.chat))}rl.appendChild(d)})}document.getElementById('search-results-container').classList.add('active');document.getElementById('chats-list-container').classList.add('hidden')})}
+        function sa(q){if(!q){document.getElementById('search-results-container').classList.remove('active');document.getElementById('chats-list-container').classList.remove('hidden');return}const lq=q.toLowerCase().replace(/^@/,''),res=[];Object.entries(au).forEach(([uid,u])=>{if(!u||uid===ci)return;const priv=u.privacySettings||{};const fm=priv.findMe||'everyone';if(fm==='nobody')return;if(fm==='username'&&!lq.startsWith('@'))return;const nm=(u.username||'').toLowerCase(),un=(u.searchUsername||'').toLowerCase();if(nm.includes(lq)||un.includes(lq))res.push({type:'user',user:u,userId:uid,score:un===lq?0:1})});fetch('https://max-chat-f9319-default-rtdb.europe-west1.firebasedatabase.app/chats.json').then(r=>r.json()).then(allChats=>{if(!allChats)return;Object.entries(allChats).forEach(([cid,chat])=>{if(!chat.name||chat.type==='private')return;if(chat.participants&&chat.participants[ci])return;if(chat.privacy&&chat.privacy!=='public')return;const chatName=(chat.name||'').toLowerCase(),chatUsername=(chat.username||'').toLowerCase();if(chatName.includes(lq)||chatUsername.includes(lq))res.push({type:'public_chat',chat:chat,chatId:cid,score:chatUsername===lq?0:1})});res.sort((a,b)=>a.score-b.score);const rl=document.getElementById('search-results-list');if(!res.length){rl.innerHTML=`<div style="text-align:center;padding:20px;color:var(--gray)">${t('nothingFound')}</div>`}else{rl.innerHTML='';res.forEach(r=>{const d=document.createElement('div');d.className='search-result-item';if(r.type==='user'){const av=r.user.avatar||DA;d.innerHTML=`<div class="avatar-img" style="width:48px;height:48px;background-image:url('${av}');margin-right:12px"></div><div style="flex:1"><div style="font-weight:600;font-size:15px">${eh(r.user.username)} ${gb(r.user)}</div><div style="font-size:12px;color:var(--gray)">@${eh(r.user.searchUsername||'')}</div></div><button style="padding:8px 16px;background:var(--accent);border:none;border-radius:20px;color:#fff;font-size:13px;cursor:pointer">${t('message')}</button>`;d.querySelector('button').addEventListener('click',e=>{e.stopPropagation();scwu(r.userId)});d.addEventListener('click',()=>oup(r.userId))}else{const isChannel=r.chat.chatType==='channel';const avatarUrl=r.chat.avatar||DA;d.innerHTML=`<div class="avatar-img" style="width:48px;height:48px;background-image:url('${avatarUrl}');margin-right:12px"></div><div style="flex:1"><div style="font-weight:600;font-size:15px">${eh(r.chat.name)}</div><div style="font-size:12px;color:var(--gray)">${r.chat.username?'@'+eh(r.chat.username):isChannel?t('publicChannel'):t('publicGroup')}</div></div><button style="padding:8px 16px;background:var(--green);border:none;border-radius:20px;color:#fff;font-size:13px;cursor:pointer">${t('join')}</button>`;d.querySelector('button').addEventListener('click',async e=>{e.stopPropagation();await jpc(r.chatId,r.chat.chatType)});d.addEventListener('click',()=>scp(r.chat))}rl.appendChild(d)})}document.getElementById('search-results-container').classList.add('active');document.getElementById('chats-list-container').classList.add('hidden')})}
 
-        async function jpc(cid,ct){if(!ci)return;try{await upd(ref(db,`chats/${cid}/participants/${ci}`),true);if(ct==='channel'){const count=(await get(ref(db,`chats/${cid}/subscriberCount`))).val()||0;await upd(ref(db,`chats/${cid}`),{subscriberCount:count+1})}nt('Joined!','','success');document.getElementById('search-input').value='';document.getElementById('search-results-container').classList.remove('active');document.getElementById('chats-list-container').classList.remove('hidden')}catch(e){nt('Error','','error')}}
-        function scp(chat){const ic=chat.chatType==='channel';sm({title:eh(chat.name||'Chat'),content:`Type: ${ic?'Channel':'Group'}\n${chat.username?'@'+eh(chat.username)+'\n':''}Privacy: ${chat.privacy||'public'}\nSubscribers: ${chat.subscriberCount||0}\n\n${chat.description||''}`,confirmText:'Join',onConfirm:()=>jpc(chat.id,chat.chatType)})}
+        async function jpc(cid,ct){if(!ci)return;try{await upd(ref(db,`chats/${cid}/participants/${ci}`),true);if(ct==='channel'){const count=(await get(ref(db,`chats/${cid}/subscriberCount`))).val()||0;await upd(ref(db,`chats/${cid}`),{subscriberCount:count+1})}nt(t('joined'),'','success');document.getElementById('search-input').value='';document.getElementById('search-results-container').classList.remove('active');document.getElementById('chats-list-container').classList.remove('hidden')}catch(e){nt(t('error'),'','error')}}
+        function scp(chat){const ic=chat.chatType==='channel';sm({title:eh(chat.name||'Chat'),content:`Type: ${ic?'Channel':'Group'}\n${chat.username?'@'+eh(chat.username)+'\n':''}Privacy: ${chat.privacy||'public'}\nSubscribers: ${chat.subscriberCount||0}\n\n${chat.description||''}`,confirmText:t('join'),onConfirm:()=>jpc(chat.id,chat.chatType)})}
 
-        async function ccog(type){sm({title:`Create ${type}`,customHtml:`<label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Name</label><input class="modal-input" id="cr-name"><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Username (letters, numbers, _)</label><input class="modal-input" id="cr-username" placeholder="@username"><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Description</label><input class="modal-input" id="cr-desc"><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Privacy</label><select class="modal-input" id="cr-privacy"><option value="public">Public</option><option value="private">Private</option></select><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px;margin-top:10px">Who can add members?</label><select class="modal-input" id="cr-invite"><option value="everyone">All members</option><option value="admins">Only admins</option></select>`,confirmText:'Create',onConfirm:async()=>{const n=document.getElementById('cr-name')?.value?.trim();const uname=(document.getElementById('cr-username')?.value?.trim()||'').replace(/^@/,'').toLowerCase();if(!n){nt('Enter name','','error');return}if(uname){if(!/^[a-zA-Z0-9_]+$/.test(uname)){nt('Username: letters, numbers, _','','error');return}const exists=Object.values(ac).some(c=>c.username===uname);if(exists){nt('@'+uname+' taken','','error');return}}const cid=push(ref(db,'chats')).key;const cd={id:cid,chatType:type,type:'group',name:n,username:uname||null,description:document.getElementById('cr-desc')?.value?.trim()||'',privacy:document.getElementById('cr-privacy')?.value||'public',invitePolicy:document.getElementById('cr-invite')?.value||'everyone',avatar:DA,createdAt:Date.now(),lastMessage:`${type} created`,lastMessageTime:Date.now(),createdBy:ci,participants:{[ci]:true},admins:{[ci]:true},subscriberCount:1};await set(ref(db,`chats/${cid}`),cd);nt('Created!',n,'success');setTimeout(()=>{const c=ac[cid];if(c)oc(c)},500)}})}
+        async function ccog(type){sm({title:`${t('create')} ${type}`,customHtml:`<label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Name</label><input class="modal-input" id="cr-name"><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Username (letters, numbers, _)</label><input class="modal-input" id="cr-username" placeholder="@username"><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Description</label><input class="modal-input" id="cr-desc"><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Privacy</label><select class="modal-input" id="cr-privacy"><option value="public">Public</option><option value="private">Private</option></select><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px;margin-top:10px">Who can add members?</label><select class="modal-input" id="cr-invite"><option value="everyone">All members</option><option value="admins">Only admins</option></select>`,confirmText:t('create'),onConfirm:async()=>{const n=document.getElementById('cr-name')?.value?.trim();const uname=(document.getElementById('cr-username')?.value?.trim()||'').replace(/^@/,'').toLowerCase();if(!n){nt(t('fillFields'),'','error');return}if(uname){if(!/^[a-zA-Z0-9_]+$/.test(uname)){nt('Username: letters, numbers, _','','error');return}const exists=Object.values(ac).some(c=>c.username===uname);if(exists){nt('@'+uname+' taken','','error');return}}const cid=push(ref(db,'chats')).key;const cd={id:cid,chatType:type,type:'group',name:n,username:uname||null,description:document.getElementById('cr-desc')?.value?.trim()||'',privacy:document.getElementById('cr-privacy')?.value||'public',invitePolicy:document.getElementById('cr-invite')?.value||'everyone',avatar:DA,createdAt:Date.now(),lastMessage:`${type} created`,lastMessageTime:Date.now(),createdBy:ci,participants:{[ci]:true},admins:{[ci]:true},subscriberCount:1};await set(ref(db,`chats/${cid}`),cd);nt(t('created')+'!',n,'success');setTimeout(()=>{const c=ac[cid];if(c)oc(c)},500)}})}
         async function scwu(uid){if(!uid)return;document.getElementById('profile-screen').classList.add('hidden');const cid=await gocpc(uid);document.getElementById('search-input').value='';document.getElementById('search-results-container').classList.remove('active');document.getElementById('chats-list-container').classList.remove('hidden');let att=0;const f=async()=>{let c=ac[cid];if(!c){const s=await get(ref(db,`chats/${cid}`));if(s.exists())c=s.val()}if(c)oc(c);else if(att++<20)setTimeout(f,150)};f()}
-        async function gocpc(uid){for(const[id,chat]of Object.entries(ac)){if(chat.type==='private'&&chat.participants?.[uid]&&chat.participants?.[ci])return id}const nid='private_'+Date.now()+'_'+Math.random().toString(36).substr(2,8),o=au[uid];const cd={id:nid,type:'private',createdAt:Date.now(),participants:{[ci]:true,[uid]:true},lastMessage:'Chat created',lastMessageTime:Date.now(),name:o?.username||'User',avatar:o?.avatar||DA};await set(ref(db,`chats/${nid}`),cd);return nid}
+        async function gocpc(uid){for(const[id,chat]of Object.entries(ac)){if(chat.type==='private'&&chat.participants?.[uid]&&chat.participants?.[ci])return id}const nid='private_'+Date.now()+'_'+Math.random().toString(36).substr(2,8),o=au[uid];const cd={id:nid,type:'private',createdAt:Date.now(),participants:{[ci]:true,[uid]:true},lastMessage:t('chatCreated'),lastMessageTime:Date.now(),name:o?.username||'User',avatar:o?.avatar||DA};await set(ref(db,`chats/${nid}`),cd);return nid}
 
-        function oc(chat){if(!chat?.id)return;if(mu)mu();cc=chat;cci=chat.id;uc[chat.id]=0;if(chat.chatType==='channel'){document.getElementById('chat-title').textContent=chat.name||'Channel';document.getElementById('chat-subtitle').textContent=`${chat.subscriberCount||0} subscribers`;document.getElementById('chat-avatar').style.backgroundImage=`url('${chat.avatar||DA}')`;document.getElementById('chat-avatar').innerHTML='';const ia=ica();document.getElementById('message-input-area').style.display=ia?'flex':'none';document.getElementById('channel-locked').style.display=ia?'none':'flex'}else if(chat.chatType==='group'){document.getElementById('chat-title').textContent=chat.name||'Group';document.getElementById('chat-subtitle').textContent=`${Object.keys(chat.participants||{}).length} members`;document.getElementById('chat-avatar').style.backgroundImage=`url('${chat.avatar||DA}')`;document.getElementById('chat-avatar').innerHTML='';document.getElementById('message-input-area').style.display='flex';document.getElementById('channel-locked').style.display='none'}else if(chat.type==='private'&&chat.participants){const oid=Object.keys(chat.participants).find(id=>id!==ci);const other=au[oid];if(other){document.getElementById('chat-title').innerHTML=eh(other.username)+' '+gb(other);document.getElementById('chat-avatar').style.backgroundImage=`url('${other.avatar||DA}')`;document.getElementById('chat-avatar').innerHTML='';document.getElementById('chat-subtitle').textContent=other.online?'online':'offline'}document.getElementById('message-input-area').style.display='flex';document.getElementById('channel-locked').style.display='none'}if(window.innerWidth<=768){document.getElementById('chats-sidebar').classList.remove('active');document.getElementById('chat-area').classList.add('active')}else{document.getElementById('chat-area').classList.add('active')}lm(chat.id)}
+        function oc(chat){if(!chat?.id)return;if(mu)mu();cc=chat;cci=chat.id;uc[chat.id]=0;if(chat.chatType==='channel'){document.getElementById('chat-title').textContent=chat.name||'Channel';document.getElementById('chat-subtitle').textContent=`${chat.subscriberCount||0} ${t('subscribers')}`;document.getElementById('chat-avatar').style.backgroundImage=`url('${chat.avatar||DA}')`;document.getElementById('chat-avatar').innerHTML='';const ia=ica();document.getElementById('message-input-area').style.display=ia?'flex':'none';document.getElementById('channel-locked').style.display=ia?'none':'flex'}else if(chat.chatType==='group'){document.getElementById('chat-title').textContent=chat.name||'Group';document.getElementById('chat-subtitle').textContent=`${Object.keys(chat.participants||{}).length} ${t('members')}`;document.getElementById('chat-avatar').style.backgroundImage=`url('${chat.avatar||DA}')`;document.getElementById('chat-avatar').innerHTML='';document.getElementById('message-input-area').style.display='flex';document.getElementById('channel-locked').style.display='none'}else if(chat.type==='private'&&chat.participants){const oid=Object.keys(chat.participants).find(id=>id!==ci);const other=au[oid];if(other){document.getElementById('chat-title').innerHTML=eh(other.username)+' '+gb(other);document.getElementById('chat-avatar').style.backgroundImage=`url('${other.avatar||DA}')`;document.getElementById('chat-avatar').innerHTML='';document.getElementById('chat-subtitle').textContent=other.online?t('online'):t('offline')}document.getElementById('message-input-area').style.display='flex';document.getElementById('channel-locked').style.display='none'}if(window.innerWidth<=768){document.getElementById('chats-sidebar').classList.remove('active');document.getElementById('chat-area').classList.add('active')}else{document.getElementById('chat-area').classList.add('active')}lm(chat.id)}
 
-        function lm(cid){document.getElementById('messages-container').innerHTML='';const mr=ref(db,`chats/${cid}/messages`);mu=onCA(qy(mr,obc('timestamp')),snap=>{const m=snap.val();amc(m);if(m.senderId!==ci&&cci===cid&&ne){const t=cc?.chatType==='channel'?cc.name:cc?.chatType==='group'?m.senderName:null;if(t)nt(t,m.text||'New message','info')}if(m.senderId!==ci){uc[cid]=(uc[cid]||0)+1;rcl()}})}
-        function amc(m){const d=document.createElement('div'),io=m.senderId===ci;d.className=`message ${io?'outgoing':'incoming'}`;const time=ft(m.timestamp);let sender='';if((cc?.chatType==='group'||cc?.chatType==='channel')&&!io){sender=`<div class="message-sender">${eh(m.senderName||'Anonymous')}</div>`}let content='',im=false;if(m.type==='image'){im=true;const opt=m.url.replace('/upload/','/upload/w_400,c_limit,q_auto,f_auto/');content=`<a href="${m.url}" target="_blank"><img src="${opt}" class="message-image" loading="lazy" alt="Photo"></a>`}else if(m.type==='video'){im=true;const p=m.url.replace('/upload/','/upload/w_400,c_limit,q_auto,f_auto/');content=`<video controls preload="metadata" class="message-video" poster="${p}"><source src="${m.url}" type="video/mp4"></video>`}else{content=`<div class="message-text">${sender}${eh(m.text||'')}</div>`}d.innerHTML=`<div class="message-bubble ${im?'media-message-bubble':''}">${content}<div class="message-meta">${time}</div></div>`;document.getElementById('messages-container').appendChild(d);document.getElementById('messages-container').scrollTop=document.getElementById('messages-container').scrollHeight}
+        function lm(cid){document.getElementById('messages-container').innerHTML='';const mr=ref(db,`chats/${cid}/messages`);mu=onCA(qy(mr,obc('timestamp')),snap=>{const m=snap.val();amc(m);if(m.senderId!==ci&&cci===cid&&ne){const t2=cc?.chatType==='channel'?cc.name:cc?.chatType==='group'?m.senderName:null;if(t2)nt(t2,m.text||t('newMessage'),'info')}if(m.senderId!==ci){uc[cid]=(uc[cid]||0)+1;rcl()}})}
+        function amc(m){const d=document.createElement('div'),io=m.senderId===ci;d.className=`message ${io?'outgoing':'incoming'}`;const time=ft(m.timestamp);let sender='';if((cc?.chatType==='group'||cc?.chatType==='channel')&&!io){sender=`<div class="message-sender">${eh(m.senderName||'Anonymous')}</div>`}let content='',im=false;if(m.type==='image'){im=true;const opt=m.url.replace('/upload/','/upload/w_400,c_limit,q_auto,f_auto/');content=`<a href="${m.url}" target="_blank"><img src="${opt}" class="message-image" loading="lazy" alt="${t('photo')}"></a>`}else if(m.type==='video'){im=true;const p=m.url.replace('/upload/','/upload/w_400,c_limit,q_auto,f_auto/');content=`<video controls preload="metadata" class="message-video" poster="${p}"><source src="${m.url}" type="video/mp4"></video>`}else{content=`<div class="message-text">${sender}${eh(m.text||'')}</div>`}d.innerHTML=`<div class="message-bubble ${im?'media-message-bubble':''}">${content}<div class="message-meta">${time}</div></div>`;document.getElementById('messages-container').appendChild(d);document.getElementById('messages-container').scrollTop=document.getElementById('messages-container').scrollHeight}
 
-        async function smt(text){text=(text||'').trim();if(!text||!cci||!ci)return;if(cc?.chatType==='channel'&&!ica()){nt('Only admins can post','','error');return}const m={text,senderId:ci,senderName:cu?.username||'User',timestamp:Date.now()};await push(ref(db,`chats/${cci}/messages`),m);await upd(ref(db,`chats/${cci}`),{lastMessage:text,lastMessageTime:Date.now()});document.getElementById('message-input').value='';brp(cci,cc,text)}
+        async function smt(text){text=(text||'').trim();if(!text||!cci||!ci)return;if(cc?.chatType==='channel'&&!ica()){nt(t('cannotPost'),'','error');return}const m={text,senderId:ci,senderName:cu?.username||'User',timestamp:Date.now()};await push(ref(db,`chats/${cci}/messages`),m);await upd(ref(db,`chats/${cci}`),{lastMessage:text,lastMessageTime:Date.now()});document.getElementById('message-input').value='';brp(cci,cc,text)}
 
-        function sci(){if(!cc)return;const ic=cc.chatType==='channel',ig=cc.chatType==='group';if(!ic&&!ig){if(cc.type==='private'&&cc.participants){const oid=Object.keys(cc.participants).find(id=>id!==ci);if(oid)oup(oid)}return}const ia=ica();const ci2=cc.invitePolicy==='everyone'||ia;let ah='';if(ia){ah=`<button class="modal-btn confirm" id="chat-edit-name" style="margin-bottom:8px">Rename</button><button class="modal-btn confirm" id="chat-add-admin" style="margin-bottom:8px;background:var(--group)">Add Admin</button>`}if(ci2){ah+=`<button class="modal-btn confirm" id="chat-add-member" style="margin-bottom:8px;background:var(--green)">Add Member</button>`}ah+=`<button class="modal-btn cancel" id="chat-view-members" style="margin-bottom:8px">View Members</button>`;sm({title:'Chat Info',customHtml:`<div style="color:var(--gray);font-size:15px;margin-bottom:16px">Type: ${ic?'Channel':'Group'}<br>Name: ${eh(cc.name||'')}<br>${cc.username?'@'+eh(cc.username)+'\n':''}Privacy: ${cc.privacy||'public'}<br>Members: ${Object.keys(cc.participants||{}).length}<br>Created: ${new Date(cc.createdAt).toLocaleDateString()}</div>${ah}`,confirmText:'Close',onConfirm:()=>{}});setTimeout(()=>{document.getElementById('chat-edit-name')?.addEventListener('click',()=>{document.getElementById('modal-overlay').classList.add('hidden');sm({title:'Rename',customHtml:'<input class="modal-input" id="rename-input" value="'+eh(cc.name||'')+'">',confirmText:'Save',onConfirm:async()=>{const v=document.getElementById('rename-input')?.value?.trim();if(v){await upd(ref(db,`chats/${cci}/name`),v);cc.name=v;oc(cc);nt('Renamed!','','success')}}})});document.getElementById('chat-add-admin')?.addEventListener('click',()=>{document.getElementById('modal-overlay').classList.add('hidden');sm({title:'Add Admin',customHtml:'<input class="modal-input" id="admin-input" placeholder="User ID or @username">',confirmText:'Add',onConfirm:async()=>{const v=document.getElementById('admin-input')?.value?.trim();if(!v)return;let uid=v.replace('@','');const u=Object.values(au).find(x=>x.searchUsername===uid||x.id===uid);if(!u){nt('User not found','','error');return}uid=u.id;await upd(ref(db,`chats/${cci}/admins/${uid}`),true);if(!cc.participants||!cc.participants[uid]){await upd(ref(db,`chats/${cci}/participants/${uid}`),true)}nt('Admin added!','','success')}})});document.getElementById('chat-add-member')?.addEventListener('click',()=>{document.getElementById('modal-overlay').classList.add('hidden');sm({title:'Add Member',customHtml:'<input class="modal-input" id="member-input" placeholder="User ID or @username">',confirmText:'Add',onConfirm:async()=>{const v=document.getElementById('member-input')?.value?.trim();if(!v)return;let uid=v.replace('@','');const u=Object.values(au).find(x=>x.searchUsername===uid||x.id===uid);if(!u){nt('User not found','','error');return}uid=u.id;const priv=u.privacySettings||{};if((priv.inviteMe||'everyone')==='nobody'&&!ia){nt('User does not allow invites','','error');return}await upd(ref(db,`chats/${cci}/participants/${uid}`),true);if(cc.chatType==='channel'){const cnt=(await get(ref(db,`chats/${cci}/subscriberCount`))).val()||0;await upd(ref(db,`chats/${cci}`),{subscriberCount:cnt+1})}nt('Member added!','','success')}})});document.getElementById('chat-view-members')?.addEventListener('click',()=>{document.getElementById('modal-overlay').classList.add('hidden');const members=cc.participants||{};const list=Object.keys(members).map(id=>{const u=au[id];const ia2=cc.admins&&cc.admins[id];return`${u?.username||id} ${ia2?'(Admin)':''}`}).join('\n');sm({title:'Members',content:list||'No members',confirmText:'Close'})})},100)}
+        function sci(){if(!cc)return;const ic=cc.chatType==='channel',ig=cc.chatType==='group';if(!ic&&!ig){if(cc.type==='private'&&cc.participants){const oid=Object.keys(cc.participants).find(id=>id!==ci);if(oid)oup(oid)}return}const ia=ica();const ci2=cc.invitePolicy==='everyone'||ia;let ah='';if(ia){ah=`<button class="modal-btn confirm" id="chat-edit-name" style="margin-bottom:8px">Rename</button><button class="modal-btn confirm" id="chat-add-admin" style="margin-bottom:8px;background:var(--group)">Add Admin</button>`}if(ci2){ah+=`<button class="modal-btn confirm" id="chat-add-member" style="margin-bottom:8px;background:var(--green)">Add Member</button>`}ah+=`<button class="modal-btn cancel" id="chat-view-members" style="margin-bottom:8px">View Members</button>`;sm({title:'Chat Info',customHtml:`<div style="color:var(--gray);font-size:15px;margin-bottom:16px">Type: ${ic?'Channel':'Group'}<br>Name: ${eh(cc.name||'')}<br>${cc.username?'@'+eh(cc.username)+'\n':''}Privacy: ${cc.privacy||'public'}<br>Members: ${Object.keys(cc.participants||{}).length}<br>Created: ${new Date(cc.createdAt).toLocaleDateString()}</div>${ah}`,confirmText:t('close'),onConfirm:()=>{}});setTimeout(()=>{document.getElementById('chat-edit-name')?.addEventListener('click',()=>{document.getElementById('modal-overlay').classList.add('hidden');sm({title:'Rename',customHtml:'<input class="modal-input" id="rename-input" value="'+eh(cc.name||'')+'">',confirmText:t('save'),onConfirm:async()=>{const v=document.getElementById('rename-input')?.value?.trim();if(v){await upd(ref(db,`chats/${cci}/name`),v);cc.name=v;oc(cc);nt(t('renamed'),'','success')}}})});document.getElementById('chat-add-admin')?.addEventListener('click',()=>{document.getElementById('modal-overlay').classList.add('hidden');sm({title:'Add Admin',customHtml:'<input class="modal-input" id="admin-input" placeholder="User ID or @username">',confirmText:'Add',onConfirm:async()=>{const v=document.getElementById('admin-input')?.value?.trim();if(!v)return;let uid=v.replace('@','');const u=Object.values(au).find(x=>x.searchUsername===uid||x.id===uid);if(!u){nt(t('userNotFound'),'','error');return}uid=u.id;await upd(ref(db,`chats/${cci}/admins/${uid}`),true);if(!cc.participants||!cc.participants[uid]){await upd(ref(db,`chats/${cci}/participants/${uid}`),true)}nt(t('adminAdded'),'','success')}})});document.getElementById('chat-add-member')?.addEventListener('click',()=>{document.getElementById('modal-overlay').classList.add('hidden');sm({title:'Add Member',customHtml:'<input class="modal-input" id="member-input" placeholder="User ID or @username">',confirmText:'Add',onConfirm:async()=>{const v=document.getElementById('member-input')?.value?.trim();if(!v)return;let uid=v.replace('@','');const u=Object.values(au).find(x=>x.searchUsername===uid||x.id===uid);if(!u){nt(t('userNotFound'),'','error');return}uid=u.id;const priv=u.privacySettings||{};if((priv.inviteMe||'everyone')==='nobody'&&!ia){nt('User does not allow invites','','error');return}await upd(ref(db,`chats/${cci}/participants/${uid}`),true);if(cc.chatType==='channel'){const cnt=(await get(ref(db,`chats/${cci}/subscriberCount`))).val()||0;await upd(ref(db,`chats/${cci}`),{subscriberCount:cnt+1})}nt(t('memberAdded'),'','success')}})});document.getElementById('chat-view-members')?.addEventListener('click',()=>{document.getElementById('modal-overlay').classList.add('hidden');const members=cc.participants||{};const list=Object.keys(members).map(id=>{const u=au[id];const ia2=cc.admins&&cc.admins[id];return`${u?.username||id} ${ia2?'(Admin)':''}`}).join('\n');sm({title:'Members',content:list||'No members',confirmText:t('close')})})},100)}
 
-        function oup(uid){const isSelf=uid===ci,u=isSelf?cu:au[uid];if(!u){nt('User not found','','error');return}vu=uid;const av=u.avatar||DA;document.getElementById('profile-avatar').style.backgroundImage=`url('${av}')`;document.getElementById('profile-name').innerHTML=eh(u.username||'')+' '+gb(u);document.getElementById('profile-substatus').textContent=isSelf?'this is you':(u.isBot?'bot':(u.online?'online':'offline'));const rows=[];if(u.bio)rows.push({label:'Bio',value:eh(u.bio)});if(u.searchUsername)rows.push({label:'Username',value:'@'+eh(u.searchUsername)});rows.push({label:'ID',value:String(u.id||uid)});if(u.createdAt)rows.push({label:'Joined',value:new Date(u.createdAt).toLocaleDateString('en-US')});if(isSelf&&u.email)rows.push({label:'Email',value:eh(u.email)});const priv=u.privacySettings||{};if(isSelf){rows.push({label:'Invite me',value:priv.inviteMe||'everyone'});rows.push({label:'Find me',value:priv.findMe||'everyone'})}document.getElementById('tg-info-list').innerHTML=rows.map(r=>`<div class="tg-info-row"><div class="tg-info-label">${r.label}</div><div class="tg-info-value">${r.value}</div></div>`).join('');document.getElementById('tg-action-row').style.display=isSelf?'none':'flex';document.getElementById('edit-profile-btn').style.display=isSelf?'flex':'none';document.getElementById('delete-account-btn').style.display=isSelf?'block':'none';document.getElementById('chats-sidebar').classList.remove('active');document.getElementById('profile-screen').classList.remove('hidden')}
+        function oup(uid){const isSelf=uid===ci,u=isSelf?cu:au[uid];if(!u){nt(t('userNotFound'),'','error');return}vu=uid;const av=u.avatar||DA;document.getElementById('profile-avatar').style.backgroundImage=`url('${av}')`;document.getElementById('profile-name').innerHTML=eh(u.username||'')+' '+gb(u);document.getElementById('profile-substatus').textContent=isSelf?t('thisIsYou'):(u.isBot?t('bot'):(u.online?t('online'):t('offline')));const rows=[];if(u.bio)rows.push({label:'Bio',value:eh(u.bio)});if(u.searchUsername)rows.push({label:'Username',value:'@'+eh(u.searchUsername)});rows.push({label:'ID',value:String(u.id||uid)});if(u.createdAt)rows.push({label:'Joined',value:new Date(u.createdAt).toLocaleDateString('en-US')});if(isSelf&&u.email)rows.push({label:'Email',value:eh(u.email)});const priv=u.privacySettings||{};if(isSelf){rows.push({label:'Invite me',value:priv.inviteMe||'everyone'});rows.push({label:'Find me',value:priv.findMe||'everyone'})}document.getElementById('tg-info-list').innerHTML=rows.map(r=>`<div class="tg-info-row"><div class="tg-info-label">${r.label}</div><div class="tg-info-value">${r.value}</div></div>`).join('');document.getElementById('tg-action-row').style.display=isSelf?'none':'flex';document.getElementById('edit-profile-btn').style.display=isSelf?'flex':'none';document.getElementById('delete-account-btn').style.display=isSelf?'block':'none';document.getElementById('chats-sidebar').classList.remove('active');document.getElementById('profile-screen').classList.remove('hidden')}
         function uui(){if(!cu)return;document.getElementById('user-avatar').style.backgroundImage=`url('${cu.avatar||DA}')`;document.getElementById('current-username').innerHTML=eh(cu.username)+' '+gb(cu);document.getElementById('user-stars').textContent=(cu.stars||0)+' stars'}
 
-        document.getElementById('profile-avatar').addEventListener('click',async()=>{if(!cu||!ci)return;const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.onchange=async(e)=>{const f=e.target.files[0];if(!f)return;try{nt('Uploading avatar...','','info');const r=await ucf(f);await upd(ref(db,`users/${ci}`),{avatar:r.secure_url});cu.avatar=r.secure_url;uui();document.getElementById('profile-avatar').style.backgroundImage=`url('${r.secure_url}')`;nt('Avatar updated!','','success')}catch(err){nt('Error',err.message,'error')}};inp.click()});
+        document.getElementById('profile-avatar').addEventListener('click',async()=>{if(!cu||!ci)return;const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.onchange=async(e)=>{const f=e.target.files[0];if(!f)return;try{nt(t('uploading'),'','info');const r=await ucf(f);await upd(ref(db,`users/${ci}`),{avatar:r.secure_url});cu.avatar=r.secure_url;uui();document.getElementById('profile-avatar').style.backgroundImage=`url('${r.secure_url}')`;nt(t('avatarUpdated'),'','success')}catch(err){nt(t('error'),err.message,'error')}};inp.click()});
 
-        function sps(){if(!cu)return;sm({title:'Edit Profile',customHtml:`<label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Name</label><input class="modal-input" id="set-name" value="${eh(cu.username||'')}"><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Username</label><input class="modal-input" id="set-username" value="${eh(cu.searchUsername||'')}"><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Bio</label><input class="modal-input" id="set-bio" value="${eh(cu.bio||'')}">`,confirmText:'Save',onConfirm:async()=>{const name=document.getElementById('set-name')?.value?.trim();const uname=document.getElementById('set-username')?.value?.trim().toLowerCase();const bio=document.getElementById('set-bio')?.value?.trim();if(!name){nt('Name required','','error');return}if(uname&&uname!==cu.searchUsername){if(!/^[a-zA-Z0-9_]+$/.test(uname)){nt('Username: letters, numbers, _','','error');return}const exists=Object.values(au).some(u=>u.searchUsername===uname&&u.id!==ci);if(exists){nt('Username taken','','error');return}}const updates={};if(name!==cu.username)updates.username=name;if(uname!==cu.searchUsername)updates.searchUsername=uname;if(bio!==(cu.bio||''))updates.bio=bio;if(Object.keys(updates).length>0){await upd(ref(db,`users/${ci}`),updates);Object.assign(cu,updates);uui();nt('Profile updated!','','success')}}})}
-        function sprs(){if(!cu)return;const priv=cu.privacySettings||{};sm({title:'Privacy Settings',customHtml:`<label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Who can invite me?</label><select class="modal-input" id="priv-invite"><option value="everyone" ${(priv.inviteMe||'everyone')==='everyone'?'selected':''}>Everyone</option><option value="nobody" ${priv.inviteMe==='nobody'?'selected':''}>Nobody</option></select><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px;margin-top:10px">Who can find me?</label><select class="modal-input" id="priv-find"><option value="everyone" ${(priv.findMe||'everyone')==='everyone'?'selected':''}>Everyone</option><option value="username" ${priv.findMe==='username'?'selected':''}>Only by username</option><option value="nobody" ${priv.findMe==='nobody'?'selected':''}>Nobody</option></select>`,confirmText:'Save',onConfirm:async()=>{const inviteMe=document.getElementById('priv-invite')?.value||'everyone';const findMe=document.getElementById('priv-find')?.value||'everyone';await upd(ref(db,`users/${ci}/privacySettings`),{inviteMe,findMe});cu.privacySettings={inviteMe,findMe};nt('Privacy saved!','','success')}})}
+        function sps(){if(!cu)return;sm({title:t('setEditProfile'),customHtml:`<label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Name</label><input class="modal-input" id="set-name" value="${eh(cu.username||'')}"><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Username</label><input class="modal-input" id="set-username" value="${eh(cu.searchUsername||'')}"><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Bio</label><input class="modal-input" id="set-bio" value="${eh(cu.bio||'')}">`,confirmText:t('save'),onConfirm:async()=>{const name=document.getElementById('set-name')?.value?.trim();const uname=document.getElementById('set-username')?.value?.trim().toLowerCase();const bio=document.getElementById('set-bio')?.value?.trim();if(!name){nt(t('fillFields'),'','error');return}if(uname&&uname!==cu.searchUsername){if(!/^[a-zA-Z0-9_]+$/.test(uname)){nt('Username: letters, numbers, _','','error');return}const exists=Object.values(au).some(u=>u.searchUsername===uname&&u.id!==ci);if(exists){nt('Username taken','','error');return}}const updates={};if(name!==cu.username)updates.username=name;if(uname!==cu.searchUsername)updates.searchUsername=uname;if(bio!==(cu.bio||''))updates.bio=bio;if(Object.keys(updates).length>0){await upd(ref(db,`users/${ci}`),updates);Object.assign(cu,updates);uui();nt(t('profileUpdated'),'','success')}}})}
+        function sprs(){if(!cu)return;const priv=cu.privacySettings||{};sm({title:t('setPrivacy'),customHtml:`<label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Who can invite me?</label><select class="modal-input" id="priv-invite"><option value="everyone" ${(priv.inviteMe||'everyone')==='everyone'?'selected':''}>Everyone</option><option value="nobody" ${priv.inviteMe==='nobody'?'selected':''}>Nobody</option></select><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px;margin-top:10px">Who can find me?</label><select class="modal-input" id="priv-find"><option value="everyone" ${(priv.findMe||'everyone')==='everyone'?'selected':''}>Everyone</option><option value="username" ${priv.findMe==='username'?'selected':''}>Only by username</option><option value="nobody" ${priv.findMe==='nobody'?'selected':''}>Nobody</option></select>`,confirmText:t('save'),onConfirm:async()=>{const inviteMe=document.getElementById('priv-invite')?.value||'everyone';const findMe=document.getElementById('priv-find')?.value||'everyone';await upd(ref(db,`users/${ci}/privacySettings`),{inviteMe,findMe});cu.privacySettings={inviteMe,findMe};nt(t('privacySaved'),'','success')}})}
 
-        auth.onAuthStateChanged(async(user)=>{if(user){ci=user.uid;const snap=await get(ref(db,`users/${user.uid}`));if(snap.exists()){cu=snap.val();if(cu.ban){await auth.signOut();nt('Account banned','','error');return}}else{const uname=user.email?user.email.split('@')[0].replace(/[^a-zA-Z0-9_]/g,'')+'_'+Math.floor(Math.random()*1000):'user_'+Math.random().toString(36).substr(2,8);cu={id:user.uid,username:user.displayName||user.email?.split('@')[0]||'User',searchUsername:uname,email:user.email||'',stars:0,grant:false,checkReal:false,special:false,ban:false,bio:'Hello!',avatar:user.photoURL||DA,privacySettings:{inviteMe:'everyone',findMe:'everyone'},createdAt:Date.now(),lastSeen:Date.now(),online:true};await set(ref(db,`users/${user.uid}`),cu)}await upd(ref(db,`users/${ci}`),{online:true,lastSeen:Date.now()});document.getElementById('auth-screen').style.display='none';document.getElementById('main-screen').classList.add('active');uui();lau();luc();ls();lan()}else{document.getElementById('main-screen').classList.remove('active');document.getElementById('auth-screen').style.display='flex'}});
+        auth.onAuthStateChanged(async(user)=>{if(user){ci=user.uid;const snap=await get(ref(db,`users/${user.uid}`));if(snap.exists()){cu=snap.val();if(cu.ban){await auth.signOut();nt(t('accountBanned'),'','error');return}}else{const uname=user.email?user.email.split('@')[0].replace(/[^a-zA-Z0-9_]/g,'')+'_'+Math.floor(Math.random()*1000):'user_'+Math.random().toString(36).substr(2,8);cu={id:user.uid,username:user.displayName||user.email?.split('@')[0]||'User',searchUsername:uname,email:user.email||'',stars:0,grant:false,checkReal:false,special:false,ban:false,bio:'Hello!',avatar:user.photoURL||DA,privacySettings:{inviteMe:'everyone',findMe:'everyone'},createdAt:Date.now(),lastSeen:Date.now(),online:true};await set(ref(db,`users/${user.uid}`),cu)}await upd(ref(db,`users/${ci}`),{online:true,lastSeen:Date.now()});document.getElementById('auth-screen').style.display='none';document.getElementById('main-screen').classList.add('active');uui();lau();luc();ls();lan();applyLanguage()}else{document.getElementById('main-screen').classList.remove('active');document.getElementById('auth-screen').style.display='flex';applyLanguage()}});
 
         // Google Login - Blocked with explanation
-        document.getElementById('google-login-btn').addEventListener('click',()=>{sm({title:'Google Sign-In Unavailable',content:'Access to Google account login is blocked due to regulatory restrictions (Federal Law No. 149-FZ).\n\nYou can log into an existing account to set a password, after which login will be via email and password only.',confirmText:'Set Password for Account',cancelText:'Cancel',onConfirm:()=>{document.getElementById('modal-overlay').classList.add('hidden');sm({title:'Set Password for Google Account',customHtml:`<label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Your Google Email</label><input class="modal-input" id="reset-email" placeholder="Email"><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">New Password (min 6 chars)</label><input class="modal-input" id="reset-password" type="password" placeholder="Password"><div style="color:var(--gray);font-size:11px;margin-top:8px">After setting a password, you can log in with email and password.</div>`,confirmText:'Send Reset Email',cancelText:'Cancel',onConfirm:async()=>{const email=document.getElementById('reset-email')?.value?.trim();const password=document.getElementById('reset-password')?.value?.trim();if(!email||!password){nt('Fill all fields','','error');return}if(password.length<6){nt('Password min 6 chars','','error');return}try{await auth.sendPasswordResetEmail(email);nt('Password reset email sent!','Check your inbox','success')}catch(e){if(e.code==='auth/user-not-found'){nt('Account not found','Create a new account with this email','error')}else{nt('Error',e.message,'error')}}}})},onCancel:()=>{document.getElementById('modal-overlay').classList.add('hidden')}})});
+        document.getElementById('google-login-btn').addEventListener('click',()=>{sm({title:'Google Sign-In Unavailable',content:'Access to Google account login is blocked due to regulatory restrictions (Federal Law No. 149-FZ).\n\nYou can log into an existing account to set a password, after which login will be via email and password only.',confirmText:'Set Password for Account',cancelText:t('cancel'),onConfirm:()=>{document.getElementById('modal-overlay').classList.add('hidden');sm({title:'Set Password for Google Account',customHtml:`<label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">Your Google Email</label><input class="modal-input" id="reset-email" placeholder="Email"><label style="color:var(--gray);font-size:12px;display:block;margin-bottom:4px">New Password (min 6 chars)</label><input class="modal-input" id="reset-password" type="password" placeholder="Password"><div style="color:var(--gray);font-size:11px;margin-top:8px">After setting a password, you can log in with email and password.</div>`,confirmText:'Send Reset Email',cancelText:t('cancel'),onConfirm:async()=>{const email=document.getElementById('reset-email')?.value?.trim();const password=document.getElementById('reset-password')?.value?.trim();if(!email||!password){nt(t('fillFields'),'','error');return}if(password.length<6){nt(t('passwordMin6'),'','error');return}try{await auth.sendPasswordResetEmail(email);nt('Password reset email sent!','Check your inbox','success')}catch(e){if(e.code==='auth/user-not-found'){nt('Account not found','Create a new account with this email','error')}else{nt(t('error'),e.message,'error')}}}})},onCancel:()=>{document.getElementById('modal-overlay').classList.add('hidden')}})});
 
-        document.getElementById('login-btn').addEventListener('click',async()=>{const e=document.getElementById('login-username').value.trim(),p=document.getElementById('login-password').value.trim();if(!e||!p){nt('Fill fields','','error');return}try{await auth.signInWithEmailAndPassword(e,p)}catch(err){nt(err.code==='auth/invalid-credential'?'Invalid credentials':err.message,'','error')}});
-        document.getElementById('register-btn').addEventListener('click',async()=>{if(!document.getElementById('age-checkbox').checked){nt('You must be 13+','','error');return}if(!document.getElementById('privacy-checkbox').checked){nt('Accept Privacy Policy','','error');return}const un=document.getElementById('register-username').value.trim(),em=document.getElementById('register-email').value.trim(),pw=document.getElementById('register-password').value.trim();if(!un||!em||!pw){nt('Fill fields','','error');return}if(pw.length<6){nt('Password min 6','','error');return}try{const r=await auth.createUserWithEmailAndPassword(em,pw);const uid=r.user.uid;const sun=em.split('@')[0].replace(/[^a-zA-Z0-9_]/g,'')+'_'+Math.floor(Math.random()*1000);await set(ref(db,`users/${uid}`),{id:uid,username:un,searchUsername:sun,email:em,stars:0,grant:false,checkReal:false,special:false,ban:false,bio:'Hello!',avatar:`https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=2b5278&color=fff&size=256`,privacySettings:{inviteMe:'everyone',findMe:'everyone'},createdAt:Date.now(),lastSeen:Date.now(),online:true});await r.user.updateProfile({displayName:un})}catch(e){nt(e.code==='auth/email-already-in-use'?'Email taken':e.message,'','error')}});
+        document.getElementById('login-btn').addEventListener('click',async()=>{const e=document.getElementById('login-username').value.trim(),p=document.getElementById('login-password').value.trim();if(!e||!p){nt(t('fillFields'),'','error');return}try{await auth.signInWithEmailAndPassword(e,p)}catch(err){nt(err.code==='auth/invalid-credential'?t('invalidCredentials'):err.message,'','error')}});
+        document.getElementById('register-btn').addEventListener('click',async()=>{if(!document.getElementById('age-checkbox').checked){nt('You must be 13+','','error');return}if(!document.getElementById('privacy-checkbox').checked){nt('Accept Privacy Policy','','error');return}const un=document.getElementById('register-username').value.trim(),em=document.getElementById('register-email').value.trim(),pw=document.getElementById('register-password').value.trim();if(!un||!em||!pw){nt(t('fillFields'),'','error');return}if(pw.length<6){nt(t('passwordMin6'),'','error');return}try{const r=await auth.createUserWithEmailAndPassword(em,pw);const uid=r.user.uid;const sun=em.split('@')[0].replace(/[^a-zA-Z0-9_]/g,'')+'_'+Math.floor(Math.random()*1000);await set(ref(db,`users/${uid}`),{id:uid,username:un,searchUsername:sun,email:em,stars:0,grant:false,checkReal:false,special:false,ban:false,bio:'Hello!',avatar:`https://ui-avatars.com/api/?name=${encodeURIComponent(un)}&background=2b5278&color=fff&size=256`,privacySettings:{inviteMe:'everyone',findMe:'everyone'},createdAt:Date.now(),lastSeen:Date.now(),online:true});await r.user.updateProfile({displayName:un})}catch(e){nt(e.code==='auth/email-already-in-use'?t('emailTaken'):e.message,'','error')}});
         document.getElementById('logout-btn').addEventListener('click',async()=>{if(ci)await upd(ref(db,`users/${ci}`),{online:false,lastSeen:Date.now()});if(mu)mu();if(chu)chu();if(su)su();if(ans)ans();cu=null;ci=null;await auth.signOut()});
         function updateRegBtn(){const a=document.getElementById('age-checkbox')?.checked;const p=document.getElementById('privacy-checkbox')?.checked;document.getElementById('register-btn').disabled=!(a&&p)}
         document.getElementById('age-checkbox').addEventListener('change',updateRegBtn);document.getElementById('privacy-checkbox').addEventListener('change',updateRegBtn);
@@ -301,26 +634,62 @@
         document.getElementById('settings-menu-btn').addEventListener('click',()=>{document.getElementById('settings-screen').classList.remove('hidden');document.getElementById('chats-sidebar').classList.remove('active')});
         document.getElementById('search-input').addEventListener('input',e=>sa(e.target.value));
         document.querySelectorAll('.tab-btn').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');at=b.dataset.tab;document.getElementById('search-results-container').classList.remove('active');document.getElementById('chats-list-container').classList.remove('hidden');document.getElementById('search-input').value='';rcl()})});
-        document.getElementById('create-chat-btn').addEventListener('click',()=>{sm({title:'Create',customHtml:'<button class="modal-btn confirm" id="cr-chan" style="background:var(--channel);margin-bottom:8px">Channel</button><button class="modal-btn confirm" id="cr-grp" style="background:var(--group)">Group</button>',confirmText:'Close',cancelText:'',onConfirm:()=>{}});setTimeout(()=>{document.getElementById('cr-chan')?.addEventListener('click',()=>{document.getElementById('modal-overlay').classList.add('hidden');ccog('channel')});document.getElementById('cr-grp')?.addEventListener('click',()=>{document.getElementById('modal-overlay').classList.add('hidden');ccog('group')})},100)});
+        document.getElementById('create-chat-btn').addEventListener('click',()=>{sm({title:t('create'),customHtml:'<button class="modal-btn confirm" id="cr-chan" style="background:var(--channel);margin-bottom:8px">Channel</button><button class="modal-btn confirm" id="cr-grp" style="background:var(--group)">Group</button>',confirmText:t('close'),cancelText:'',onConfirm:()=>{}});setTimeout(()=>{document.getElementById('cr-chan')?.addEventListener('click',()=>{document.getElementById('modal-overlay').classList.add('hidden');ccog('channel')});document.getElementById('cr-grp')?.addEventListener('click',()=>{document.getElementById('modal-overlay').classList.add('hidden');ccog('group')})},100)});
         document.getElementById('settings-edit-profile').addEventListener('click',()=>{sps()});
         document.getElementById('settings-privacy').addEventListener('click',()=>{sprs()});
         document.getElementById('settings-create-channel').addEventListener('click',()=>{ccog('channel')});
         document.getElementById('settings-create-group').addEventListener('click',()=>{ccog('group')});
-        document.getElementById('settings-desktop').addEventListener('click',()=>{if(!cu||!ci){nt('Login first','','error');return}const p=new URLSearchParams({token:ci,email:cu.email||'',name:cu.username||'',photo:cu.avatar||''});window.location.href='collapschat://auth?'+p.toString();setTimeout(()=>{nt('Desktop app not found','Install Collaps Chat Desktop','error')},2000)});
+        document.getElementById('settings-desktop').addEventListener('click',()=>{if(!cu||!ci){nt('Login first','','error');return}const p=new URLSearchParams({token:ci,email:cu.email||'',name:cu.username||'',photo:cu.avatar||''});window.location.href='collapschat://auth?'+p.toString();setTimeout(()=>{nt(t('desktopNotFound'),t('installDesktop'),'error')},2000)});
+        
+        // Language settings
+        document.getElementById('settings-language').addEventListener('click',()=>{
+            sm({
+                title: t('languageTitle'),
+                customHtml: `
+                    <div class="lang-switch" id="lang-ru" style="margin-bottom:8px;${currentLang==='ru'?'border:2px solid var(--accent)':''}">
+                        <span class="lang-flag">🇷🇺</span>
+                        <span>${t('russian')}</span>
+                        ${currentLang==='ru'?'<span class="material-symbols-rounded" style="color:var(--green);margin-left:auto">check_circle</span>':''}
+                    </div>
+                    <div class="lang-switch" id="lang-en" style="${currentLang==='en'?'border:2px solid var(--accent)':''}">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>${t('english')}</span>
+                        ${currentLang==='en'?'<span class="material-symbols-rounded" style="color:var(--green);margin-left:auto">check_circle</span>':''}
+                    </div>
+                `,
+                confirmText: t('close'),
+                cancelText: '',
+                onConfirm: () => {}
+            });
+            setTimeout(() => {
+                document.getElementById('lang-ru')?.addEventListener('click', () => {
+                    document.getElementById('modal-overlay').classList.add('hidden');
+                    changeLanguage('ru');
+                });
+                document.getElementById('lang-en')?.addEventListener('click', () => {
+                    document.getElementById('modal-overlay').classList.add('hidden');
+                    changeLanguage('en');
+                });
+            }, 100);
+        });
+        
         document.getElementById('settings-announcements').addEventListener('click',()=>window.open('announcements.html','_blank'));
-        document.getElementById('settings-support').addEventListener('click',()=>{sm({title:'Support',content:'Contact us via email:\n\ncollapschat@bk.ru',confirmText:'OK'})});
-        document.getElementById('settings-delete').addEventListener('click',()=>{sm({title:'Delete Account',content:'Cannot be undone!',confirmText:'Delete',onConfirm:async()=>{await rem(ref(db,`users/${ci}`));await auth.currentUser?.delete();await auth.signOut()}})});
-        document.getElementById('edit-profile-btn').addEventListener('click',()=>{sm({title:'Edit Bio',customHtml:'<input class="modal-input" id="ed-bio" value="'+(cu?.bio||'')+'">',confirmText:'Save',onConfirm:async()=>{const bio=document.getElementById('ed-bio')?.value?.trim();if(bio!==undefined&&ci){await upd(ref(db,`users/${ci}`),{bio});cu.bio=bio;oup(ci)}}})});
-        document.getElementById('delete-account-btn').addEventListener('click',()=>{sm({title:'Delete Account',content:'Cannot be undone!',confirmText:'Delete',onConfirm:async()=>{await rem(ref(db,`users/${ci}`));await auth.currentUser?.delete();await auth.signOut()}})});
+        document.getElementById('settings-support').addEventListener('click',()=>{sm({title:t('setSupport'),content:t('supportContact'),confirmText:'OK'})});
+        document.getElementById('settings-delete').addEventListener('click',()=>{sm({title:t('deleteTitle'),content:t('deleteConfirm'),confirmText:t('delete'),onConfirm:async()=>{await rem(ref(db,`users/${ci}`));await auth.currentUser?.delete();await auth.signOut()}})});
+        document.getElementById('edit-profile-btn').addEventListener('click',()=>{sm({title:'Edit Bio',customHtml:'<input class="modal-input" id="ed-bio" value="'+(cu?.bio||'')+'">',confirmText:t('save'),onConfirm:async()=>{const bio=document.getElementById('ed-bio')?.value?.trim();if(bio!==undefined&&ci){await upd(ref(db,`users/${ci}`),{bio});cu.bio=bio;oup(ci)}}})});
+        document.getElementById('delete-account-btn').addEventListener('click',()=>{sm({title:t('deleteTitle'),content:t('deleteConfirm'),confirmText:t('delete'),onConfirm:async()=>{await rem(ref(db,`users/${ci}`));await auth.currentUser?.delete();await auth.signOut()}})});
         document.getElementById('tg-act-message')?.addEventListener('click',()=>{if(vu&&vu!==ci)scwu(vu)});
-        document.getElementById('tg-act-mute')?.addEventListener('click',()=>{ne=!ne;nt(ne?'Notifications ON':'Notifications OFF','',ne?'success':'warning')});
-        document.getElementById('tg-act-more')?.addEventListener('click',()=>{const u=vu===ci?cu:au[vu];if(!u)return;sm({title:eh(u.username||'Profile'),content:`@${eh(u.searchUsername||'')}\nID: ${u.id||vu}\n${u.bio||''}`,confirmText:'Close'})});
+        document.getElementById('tg-act-mute')?.addEventListener('click',()=>{ne=!ne;nt(ne?t('notificationsON'):t('notificationsOFF'),'',ne?'success':'warning')});
+        document.getElementById('tg-act-more')?.addEventListener('click',()=>{const u=vu===ci?cu:au[vu];if(!u)return;sm({title:eh(u.username||'Profile'),content:`@${eh(u.searchUsername||'')}\nID: ${u.id||vu}\n${u.bio||''}`,confirmText:t('close')})});
         document.getElementById('chat-header-info').addEventListener('click',()=>{if(cc?.type==='private'&&cc.participants){const oid=Object.keys(cc.participants).find(id=>id!==ci);if(oid)oup(oid)}});
         document.getElementById('chat-info-btn').addEventListener('click',sci);
-        document.getElementById('file-upload').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;if(f.size>100*1024*1024){nt('Too large','Max 100 MB','error');return}if(!f.type.startsWith('image/')&&!f.type.startsWith('video/')){nt('Images/videos only','','error');return}usf(f);e.target.value=''});
+        document.getElementById('file-upload').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;if(f.size>100*1024*1024){nt(t('tooLarge'),t('max100MB'),'error');return}if(!f.type.startsWith('image/')&&!f.type.startsWith('video/')){nt(t('imagesOnly'),'','error');return}usf(f);e.target.value=''});
         const mc2=document.getElementById('messages-container');mc2.addEventListener('dragover',e=>e.preventDefault());mc2.addEventListener('drop',e=>{e.preventDefault();const f=e.dataTransfer.files[0];if(f&&(f.type.startsWith('image/')||f.type.startsWith('video/'))){document.getElementById('file-upload').files=e.dataTransfer.files;document.getElementById('file-upload').dispatchEvent(new Event('change'))}});
         if(window.innerWidth<=768){document.getElementById('chat-area').classList.remove('active');document.getElementById('chats-sidebar').classList.add('active')}
-        setInterval(async()=>{if(ci){const s=await get(ref(db,`users/${ci}/ban`));if(s.val()===true){nt('Account banned','','error');await auth.signOut()}}},10000);
+        setInterval(async()=>{if(ci){const s=await get(ref(db,`users/${ci}/ban`));if(s.val()===true){nt(t('accountBanned'),'','error');await auth.signOut()}}},10000);
+        
+        // Apply language on load
+        applyLanguage();
         console.log('Collaps Chat ready');
     </script>
 </body>
